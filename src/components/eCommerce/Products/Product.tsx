@@ -1,5 +1,5 @@
 import { Button, Spinner } from "react-bootstrap";
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 // import { useNavigate } from "react-router-dom";
 
 // import Counter from "@components/ui/Counter";
@@ -13,7 +13,7 @@ import { addToCart } from "@store/cart/cartSlice";
 import styles from "./product.module.css";
 const { product, productImg, maximumNotice } = styles;
 
-export default function Product({
+const Product = memo(function Product({
   id,
   title,
   // cat_prefix,
@@ -51,7 +51,7 @@ export default function Product({
         <img src={img} alt={title} />
       </div>
       <h2>{title}</h2>
-      <h3>{price} EGP</h3>
+      <h3>{price.toFixed(2)} EGP</h3>
 
       <p className={maximumNotice}>
         {isQtyReachedMax
@@ -108,4 +108,6 @@ export default function Product({
       )} */}
     </div>
   );
-}
+});
+
+export default Product;

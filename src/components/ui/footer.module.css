@@ -2,7 +2,8 @@
   margin-top: auto;
   text-align: center;
   padding: 10px 0;
-  border-top: 1px solid #dadada;
-  color: #6d6d6d;
   font-size: small;
+  color: #6d6d6d;
+  background-color: #f7f7fa;
+  border-top: 1px solid #dadada;
 }

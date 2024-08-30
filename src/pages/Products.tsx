@@ -2,8 +2,9 @@ import { useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 
-import Loader from "@components/feedback/Loader";
+import Heading from "@components/ui/Heading";
 import GridList from "@components/ui/GridList";
+import Loader from "@components/feedback/Loader";
 import Product from "@components/eCommerce/Products/Product";
 
 import {
@@ -40,6 +41,7 @@ export default function Products() {
 
   return (
     <Container>
+      <Heading>{prefix} products</Heading>
       <Loader loading={loading} error={error}>
         <GridList<TProduct>
           data={productsWithQty}

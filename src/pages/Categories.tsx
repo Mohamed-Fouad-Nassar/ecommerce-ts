@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import { Container } from "react-bootstrap";
 
-import Loader from "@components/feedback/Loader";
+import Heading from "@components/ui/Heading";
 import GridList from "@components/ui/GridList";
+import Loader from "@components/feedback/Loader";
 import Category from "@components/eCommerce/Categories/Category";
 
 import { useAppDispatch, useAppSelector } from "@store/hooks";
@@ -24,6 +25,8 @@ export default function Categories() {
 
   return (
     <Container>
+      <Heading>categories</Heading>
+
       <Loader loading={loading} error={error}>
         <GridList<TCategory>
           data={categories}
