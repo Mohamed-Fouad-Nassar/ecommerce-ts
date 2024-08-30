@@ -1,6 +1,6 @@
 import { Button } from "react-bootstrap";
 
-import styles from "./Counter.module.css";
+import styles from "./counter.module.css";
 const { counterContainer, counter } = styles;
 
 type CounterProps = {

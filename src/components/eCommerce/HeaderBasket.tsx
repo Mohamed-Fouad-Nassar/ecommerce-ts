@@ -5,7 +5,7 @@ import LogoImg from "@assets/svg/cart.svg?react";
 import { useAppSelector } from "@store/hooks";
 import { getTotalCartItemsCart } from "@store/cart/cartSlice";
 
-import styles from "./HeaderBasket.module.css";
+import styles from "./headerBasket.module.css";
 const { basketContainer, basketQuantity, pumpCartQuantity, basketCart } =
   styles;
 

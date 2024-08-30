@@ -4,7 +4,7 @@ import { Container } from "react-bootstrap";
 import Footer from "@components/ui/Footer";
 import Header from "@components/ui/Header";
 
-import styles from "./MainLayout.module.css";
+import styles from "./mainLayout.module.css";
 const { container, wrapper } = styles;
 
 export default function MainLayout() {
