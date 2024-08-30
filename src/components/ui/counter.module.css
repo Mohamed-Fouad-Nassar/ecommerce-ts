@@ -1,0 +1,11 @@
+.counterContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.counter {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
