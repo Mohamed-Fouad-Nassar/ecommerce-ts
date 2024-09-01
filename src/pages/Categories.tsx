@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import Heading from "@components/ui/Heading";
 import GridList from "@components/ui/GridList";
 import Loader from "@components/feedback/Loader";
-import Category from "@components/eCommerce/categories/Category";
+import Category from "@components/eCommerce/Categories/Category";
 
 import { useAppDispatch, useAppSelector } from "@store/hooks";
 import { getCategories } from "@store/categories/categoriesSlice";
