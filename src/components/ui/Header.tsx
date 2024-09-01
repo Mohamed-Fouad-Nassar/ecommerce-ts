@@ -1,7 +1,4 @@
-import {
-  // Link,
-  NavLink,
-} from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { Badge, Container, Nav, Navbar } from "react-bootstrap";
 
 import HeaderBasket from "@components/eCommerce/HeaderBasket";
@@ -30,9 +27,9 @@ export default function Header() {
             <span>our</span> <Badge bg="info">Ecom</Badge>
           </h1>
 
-          {/* <Link className="align-self-md-end" to="/cart"> */}
-          <HeaderBasket />
-          {/* </Link> */}
+          <Link className="align-self-md-end text-decoration-none" to="/cart">
+            <HeaderBasket />
+          </Link>
         </Container>
       </div>
 
@@ -42,7 +39,7 @@ export default function Header() {
         bg="dark"
         data-bs-theme="dark"
       >
-        <Container>
+        <Container className="justify-content-end">
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">

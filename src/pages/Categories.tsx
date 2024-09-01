@@ -1,10 +1,9 @@
 import { useEffect } from "react";
-import { Container } from "react-bootstrap";
 
 import Heading from "@components/ui/Heading";
 import GridList from "@components/ui/GridList";
 import Loader from "@components/feedback/Loader";
-import Category from "@components/eCommerce/Categories/Category";
+import Category from "@components/eCommerce/categories/Category";
 
 import { useAppDispatch, useAppSelector } from "@store/hooks";
 import { getCategories } from "@store/categories/categoriesSlice";
@@ -24,7 +23,7 @@ export default function Categories() {
   }, [dispatch, categories]);
 
   return (
-    <Container>
+    <>
       <Heading>categories</Heading>
 
       <Loader loading={loading} error={error}>
@@ -34,6 +33,6 @@ export default function Categories() {
           error="there are no categories."
         />
       </Loader>
-    </Container>
+    </>
   );
 }

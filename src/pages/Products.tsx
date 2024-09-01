@@ -1,11 +1,10 @@
 import { useEffect } from "react";
-import { Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 
 import Heading from "@components/ui/Heading";
 import GridList from "@components/ui/GridList";
 import Loader from "@components/feedback/Loader";
-import Product from "@components/eCommerce/Products/Product";
+import Product from "@components/eCommerce/products/Product";
 
 import {
   cleanUpProducts,
@@ -40,7 +39,7 @@ export default function Products() {
   }, [dispatch, prefix]);
 
   return (
-    <Container>
+    <>
       <Heading>{prefix} products</Heading>
       <Loader loading={loading} error={error}>
         <GridList<TProduct>
@@ -49,6 +48,6 @@ export default function Products() {
           error="there are no products."
         />
       </Loader>
-    </Container>
+    </>
   );
 }

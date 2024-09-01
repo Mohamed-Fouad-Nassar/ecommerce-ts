@@ -18,4 +18,5 @@ const getCategories = createAsyncThunk("getCategories", async (_, thunkAPI) => {
     else return rejectWithValue("An unexpected error");
   }
 });
+
 export default getCategories;
