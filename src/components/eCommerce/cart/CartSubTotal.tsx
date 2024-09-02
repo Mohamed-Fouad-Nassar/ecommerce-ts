@@ -3,8 +3,6 @@ import { TProduct } from "@customTypes/product";
 import styles from "./cartSubTotal.module.css";
 
 export default function CartSubTotal({ products }: { products: TProduct[] }) {
-  console.log(products);
-
   const subtotal = products.reduce(
     (acc, cur) => acc + cur.price * (cur.quantity || 1),
     0

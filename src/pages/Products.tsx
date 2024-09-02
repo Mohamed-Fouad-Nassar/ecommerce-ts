@@ -24,10 +24,12 @@ export default function Products() {
     records: products,
   } = useAppSelector((state) => state.products);
   const { items: cartItems } = useAppSelector((state) => state.cart);
+  const { itemsId: wishlistItems } = useAppSelector((state) => state.wishlist);
 
   const productsWithQty = products.map((product) => ({
     ...product,
     quantity: cartItems[product.id] || 0,
+    isLiked: wishlistItems.includes(product.id),
   }));
 
   useEffect(() => {
@@ -44,7 +46,7 @@ export default function Products() {
       <Loader loading={loading} error={error}>
         <GridList<TProduct>
           data={productsWithQty}
-          renderItem={(product) => <Product {...product} />}
+          renderItem={(product) => <Product key={product.id} {...product} />}
           error="there are no products."
         />
       </Loader>

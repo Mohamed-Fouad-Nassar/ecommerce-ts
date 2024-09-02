@@ -9,6 +9,7 @@ import About from "@pages/About";
 import Product from "@pages/Product";
 import Register from "@pages/Register";
 import Products from "@pages/Products";
+import Wishlist from "@pages/Wishlist";
 import ErrorPage from "@pages/ErrorPage";
 import Categories from "@pages/Categories";
 
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
       {
         path: "cart",
         element: <Cart />,
+      },
+      {
+        path: "wishlist",
+        element: <Wishlist />,
       },
       {
         path: "login",

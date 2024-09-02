@@ -29,7 +29,9 @@ export default function Categories() {
       <Loader loading={loading} error={error}>
         <GridList<TCategory>
           data={categories}
-          renderItem={(category) => <Category {...category} />}
+          renderItem={(category) => (
+            <Category key={category.id} {...category} />
+          )}
           error="there are no categories."
         />
       </Loader>

@@ -6,7 +6,7 @@ import { TProduct } from "@customTypes/product";
 type TResponse = TProduct[];
 
 const getProductsByPrefix = createAsyncThunk(
-  "getProductsByPrefix",
+  "products/getProductsByPrefix",
   async (prefix: string, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
     try {

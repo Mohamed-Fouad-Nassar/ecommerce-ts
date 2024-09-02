@@ -1,39 +1,37 @@
-.basketContainer {
+.container {
   align-self: flex-end;
   cursor: pointer;
   display: flex;
   align-items: center;
 }
 
-.basketContainer h3 {
+.container h3 {
   color: black;
-  text-decoration: unset !important;
-  font-size: 17px;
-  margin-left: 6px;
+  font-size: 15px;
+  margin-left: 4px;
   margin-bottom: 0;
+  text-decoration: unset !important;
 }
 
-.basketCart {
+.iconContainer {
   position: relative;
 }
 
-.basketQuantity {
-  background-color: #0dcaf0;
+.totalQty {
   color: white;
-  font-size: medium;
-  height: 24px;
-  width: 24px;
+  background-color: #0dcaf0;
+  height: 20px;
+  width: 20px;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   text-align: center;
+  border: 1px solid;
   position: absolute;
-  top: -18px;
-  right: -8px;
+  top: -11px;
+  right: -5px;
+  font-size: 12px;
 }
 
-.pumpCartQuantity {
+.pumpQty {
   animation: pumping 300ms ease-out;
 }
 

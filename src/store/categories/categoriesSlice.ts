@@ -18,7 +18,7 @@ const initialState: TCategories = {
 };
 
 export const CategoriesSlice = createSlice({
-  name: "Categories",
+  name: "categories",
   initialState,
 
   reducers: {},

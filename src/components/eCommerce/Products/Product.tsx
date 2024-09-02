@@ -4,6 +4,11 @@ import { useEffect, useState, memo } from "react";
 
 // import Counter from "@components/ui/Counter";
 
+import Like from "@assets/svg/like.svg?react";
+import LikeFill from "@assets/svg/like-fill.svg?react";
+
+import { toggleLike } from "@store/wishlist/wishlistSlice";
+
 import { TProduct } from "@customTypes/product";
 
 import { useAppDispatch } from "@store/hooks";
@@ -11,7 +16,7 @@ import { useAppDispatch } from "@store/hooks";
 import { addToCart } from "@store/cart/cartSlice";
 
 import styles from "./product.module.css";
-const { product, productImg, maximumNotice } = styles;
+const { product, productImg, maximumNotice, wishlistBtn } = styles;
 
 const Product = memo(function Product({
   id,
@@ -21,10 +26,12 @@ const Product = memo(function Product({
   price,
   max = 0,
   quantity = 0,
+  isLiked,
 }: TProduct) {
   // const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
+  const [isLoading, setIsLoading] = useState(false);
   const [isBtnDisabled, setIsBtnDisabled] = useState(false);
   useEffect(() => {
     if (!isBtnDisabled) return;
@@ -41,17 +48,34 @@ const Product = memo(function Product({
     dispatch(addToCart(id));
   };
 
+  const handleLinkToggle = () => {
+    setIsLoading(true);
+    dispatch(toggleLike(id)).then(() => setIsLoading(false));
+  };
+
   const remainingItems = max - quantity;
   const isQtyReachedMax = remainingItems <= 0;
   // const isInCart = quantity > 0;
 
   return (
     <div className={product}>
+      <div className={wishlistBtn} onClick={handleLinkToggle}>
+        {isLoading ? (
+          <Spinner animation="border" size="sm" variant="primary" />
+        ) : isLiked ? (
+          <LikeFill />
+        ) : (
+          <Like />
+        )}
+
+        {/* <Like /> */}
+      </div>
+
       <div className={productImg}>
         <img src={img} alt={title} />
       </div>
       <h2>{title}</h2>
-      <h3>{price.toFixed(2)} EGP</h3>
+      <h3>{price?.toFixed(2)} EGP</h3>
 
       <p className={maximumNotice}>
         {isQtyReachedMax

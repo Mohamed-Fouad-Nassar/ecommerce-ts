@@ -27,8 +27,6 @@ export default function CartItem({
     handleChangeQty(id, +e.target.value);
   };
 
-  console.log("render");
-
   const quantityOptions = Array(max)
     .fill(0)
     .map((_, i) => {

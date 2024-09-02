@@ -1,14 +1,14 @@
 import { Link, NavLink } from "react-router-dom";
 import { Badge, Container, Nav, Navbar } from "react-bootstrap";
 
-import HeaderBasket from "@components/eCommerce/HeaderBasket";
+import HeaderBasket from "@components/eCommerce/common/HeaderBasket";
+import HeaderWishlist from "@components/eCommerce/common/HeaderWishlist";
 
 import styles from "./header.module.css";
 const { headerContainer, headerLogo } = styles;
 
 const navOne = [
   { title: "Home", path: "/" },
-  // { title: "Products", path: "/products/men" },
   { title: "Categories", path: "/categories" },
   { title: "About", path: "/about-us" },
 ];
@@ -27,9 +27,14 @@ export default function Header() {
             <span>our</span> <Badge bg="info">Ecom</Badge>
           </h1>
 
-          <Link className="align-self-md-end text-decoration-none" to="/cart">
-            <HeaderBasket />
-          </Link>
+          <div className="d-flex justify-content-end align-items-center gap-3 align-self-md-end">
+            <Link className="text-decoration-none" to="/wishlist">
+              <HeaderWishlist />
+            </Link>
+            <Link className="text-decoration-none" to="/cart">
+              <HeaderBasket />
+            </Link>
+          </div>
         </Container>
       </div>
 

@@ -6,6 +6,7 @@ import CartList from "@components/eCommerce/cart/CartList";
 
 import {
   changeQty,
+  cleanUpCart,
   getCartProducts,
   removeFromCart,
 } from "@store/cart/cartSlice";
@@ -20,6 +21,10 @@ export default function Cart() {
 
   useEffect(() => {
     dispatch(getCartProducts());
+
+    return () => {
+      dispatch(cleanUpCart());
+    };
   }, [dispatch]);
 
   const finalProducts = products.map((product) => ({

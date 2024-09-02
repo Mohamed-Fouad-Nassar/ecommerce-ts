@@ -6,8 +6,7 @@ import { useAppSelector } from "@store/hooks";
 import { getTotalCartItemsCart } from "@store/cart/cartSlice";
 
 import styles from "./headerBasket.module.css";
-const { basketContainer, basketQuantity, pumpCartQuantity, basketCart } =
-  styles;
+const { container, totalQty, pumpQty, iconContainer } = styles;
 
 export default function HeaderBasket() {
   const totalCartItemsCount = useAppSelector(getTotalCartItemsCart);
@@ -24,15 +23,15 @@ export default function HeaderBasket() {
     return () => clearTimeout(debounce);
   }, [totalCartItemsCount]);
 
-  const quantityStyle = `${basketQuantity} ${
-    isAnimate ? pumpCartQuantity : ""
-  }`;
+  const quantityStyle = `${totalQty} ${isAnimate ? pumpQty : ""}`;
 
   return (
-    <div className={basketContainer}>
-      <div className={basketCart}>
+    <div className={container}>
+      <div className={iconContainer}>
         <LogoImg title="basket icon" />
-        <div className={quantityStyle}>{totalCartItemsCount}</div>
+        {totalCartItemsCount > 0 && (
+          <div className={quantityStyle}>{totalCartItemsCount}</div>
+        )}
       </div>
       <h3>Cart</h3>
     </div>
