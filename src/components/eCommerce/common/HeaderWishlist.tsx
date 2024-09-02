@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import LogoImg from "@assets/svg/wishlist.svg?react";
+import LogoImg from "@assets/svg/wishlist-v2.svg?react";
 
 import { useAppSelector } from "@store/hooks";
 
@@ -27,7 +27,7 @@ export default function HeaderWishlist() {
   return (
     <div className={container}>
       <div className={iconContainer}>
-        <LogoImg title="basket icon" />
+        <LogoImg title="wishlist icon" />
         {itemsId?.length > 0 && (
           <div className={quantityStyle}>{itemsId?.length}</div>
         )}
