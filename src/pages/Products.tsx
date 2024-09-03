@@ -1,51 +1,22 @@
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
-
 import Heading from "@components/ui/Heading";
 import GridList from "@components/ui/GridList";
 import Loader from "@components/feedback/Loader";
 import Product from "@components/eCommerce/Products/Product";
 
-import {
-  cleanUpProducts,
-  getProductsByPrefix,
-} from "@store/products/productsSlice";
-import { useAppDispatch, useAppSelector } from "@store/hooks";
+import useProducts from "@hooks/useProducts";
 
 import { TProduct } from "@customTypes/product";
 
 export default function Products() {
-  const { prefix } = useParams();
-
-  const dispatch = useAppDispatch();
-  const {
-    loading,
-    error,
-    records: products,
-  } = useAppSelector((state) => state.products);
-  const { items: cartItems } = useAppSelector((state) => state.cart);
-  const { itemsId: wishlistItems } = useAppSelector((state) => state.wishlist);
-
-  const productsWithQty = products.map((product) => ({
-    ...product,
-    quantity: cartItems[product.id] || 0,
-    isLiked: wishlistItems.includes(product.id),
-  }));
-
-  useEffect(() => {
-    dispatch(getProductsByPrefix(prefix as string));
-
-    return () => {
-      dispatch(cleanUpProducts());
-    };
-  }, [dispatch, prefix]);
+  const { prefix, loading, error, productsWithQty: products } = useProducts();
 
   return (
     <>
-      <Heading>{prefix} products</Heading>
+      <Heading title={`${prefix} products`} />
+
       <Loader loading={loading} error={error}>
         <GridList<TProduct>
-          data={productsWithQty}
+          data={products}
           renderItem={(product) => <Product key={product.id} {...product} />}
           error="there are no products."
         />

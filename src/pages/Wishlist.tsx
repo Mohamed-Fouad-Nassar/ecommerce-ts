@@ -1,45 +1,22 @@
-import { useEffect } from "react";
-
 import Heading from "@components/ui/Heading";
 import GridList from "@components/ui/GridList";
 import Loader from "@components/feedback/Loader";
 import Product from "@components/eCommerce/Products/Product";
 
-import { useAppDispatch, useAppSelector } from "@store/hooks";
-import { getWishlistItems } from "@store/wishlist/actions/getWishlistItems";
+import useWishlist from "@hooks/useWishlist";
 
 import { TProduct } from "@customTypes/product";
-import { cleanUpProducts } from "@store/products/productsSlice";
 
 export default function Wishlist() {
-  const { items: cartItems } = useAppSelector((state) => state.cart);
-  const { loading, error, products } = useAppSelector(
-    (state) => state.wishlist
-  );
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(getWishlistItems());
-
-    return () => {
-      dispatch(cleanUpProducts());
-    };
-  }, [dispatch]);
-
-  const finalProducts = products.map((product) => ({
-    ...product,
-    quantity: cartItems[product.id] || 0,
-    isLiked: true,
-  }));
+  const { loading, error, finalProducts: products } = useWishlist();
 
   return (
     <>
-      <Heading>Wishlist</Heading>
-
+      <Heading title="your wishlist" />
       <Loader error={error} loading={loading}>
         {products.length > 0 ? (
           <GridList<TProduct>
-            data={finalProducts}
+            data={products}
             renderItem={(product) => <Product key={product.id} {...product} />}
             error="there are no products."
           />

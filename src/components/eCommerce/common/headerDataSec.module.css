@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  align-self: flex-end;
+}
+
+.container > *:first-of-type {
+  padding-right: 10px;
+  border-right: 1px solid #000;
+}
+
+.container > *:last-of-type {
+  padding-left: 10px;
+}
