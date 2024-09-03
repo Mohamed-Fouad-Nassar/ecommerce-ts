@@ -1,4 +1,4 @@
-import HeaderCounter from "./headerCounter";
+import HeaderCounter from "./HeaderCounter";
 
 import { useAppSelector } from "@store/hooks";
 import { getTotalCartItemsCart } from "@store/cart/cartSlice";
