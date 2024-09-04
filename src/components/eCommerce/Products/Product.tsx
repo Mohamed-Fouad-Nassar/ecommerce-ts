@@ -9,7 +9,7 @@ import LikeFill from "@assets/svg/like-fill.svg?react";
 
 import { toggleLike } from "@store/wishlist/wishlistSlice";
 
-import { TProduct } from "@types/product.types";
+import { TProduct } from "@customTypes/product.types";
 
 import { useAppDispatch } from "@store/hooks";
 

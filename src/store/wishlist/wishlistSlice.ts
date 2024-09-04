@@ -2,9 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import { toggleLike } from "./actions/toggleLike";
 
-import { TProduct } from "@types/product.types";
-import { isString } from "@types/guards.types";
-import { TError, TLoading } from "@types/shared.types";
+import { TProduct } from "@customTypes/product.types";
+import { isString } from "@customTypes/guards.types";
+import { TError, TLoading } from "@customTypes/shared.types";
 
 import { getWishlistItems } from "./actions/getWishlistItems";
 

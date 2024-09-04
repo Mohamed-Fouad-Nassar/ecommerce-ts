@@ -1,4 +1,4 @@
-import { TProduct } from "@types/product.types";
+import { TProduct } from "@customTypes/product.types";
 
 import styles from "./cartSubTotal.module.css";
 

@@ -1,6 +1,6 @@
 import CartItem from "./CartItem";
 
-import { TProduct } from "@types/product.types";
+import { TProduct } from "@customTypes/product.types";
 
 type Products = TProduct & { quantity: number };
 

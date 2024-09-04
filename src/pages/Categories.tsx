@@ -5,7 +5,7 @@ import Category from "@components/eCommerce/Categories/Category";
 
 import useCategories from "@hooks/useCategories";
 
-import { TCategory } from "@types/category.types";
+import { TCategory } from "@customTypes/category.types";
 
 export default function Categories() {
   const { loading, categories, error } = useCategories();

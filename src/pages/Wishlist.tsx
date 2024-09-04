@@ -5,7 +5,7 @@ import Product from "@components/eCommerce/Products/Product";
 
 import useWishlist from "@hooks/useWishlist";
 
-import { TProduct } from "@types/product.types";
+import { TProduct } from "@customTypes/product.types";
 
 export default function Wishlist() {
   const { loading, error, finalProducts: products } = useWishlist();

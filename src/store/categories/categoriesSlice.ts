@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { isString } from "@types/guards.types";
-import { TCategory } from "@types/category.types";
-import { TError, TLoading } from "@types/shared.types";
+import { isString } from "@customTypes/guards.types";
+import { TCategory } from "@customTypes/category.types";
+import { TError, TLoading } from "@customTypes/shared.types";
 
 import getCategories from "./actions/getCategories";
 

@@ -3,7 +3,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { RootState } from "@store/index";
 
-import { TProduct } from "@types/product.types";
+import { TProduct } from "@customTypes/product.types";
 
 import handleAxiosErr from "@utils/handleAxiosErr";
 

@@ -3,9 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 import getTotalCartItemsCart from "./selectors/getTotalCartItemsCartSelector";
 import getAvailableItemsQty from "./selectors/getAvailableItemsQuantitySelector";
 
-import { isString } from "@types/guards.types";
-import { TProduct } from "@types/product.types";
-import { TError, TLoading } from "@types/shared.types";
+import { isString } from "@customTypes/guards.types";
+import { TProduct } from "@customTypes/product.types";
+import { TError, TLoading } from "@customTypes/shared.types";
 
 import getCartProducts from "./actions/getCartProducts";
 
