@@ -3,7 +3,9 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { RootState } from "@store/index";
 
-import { TProduct } from "@customTypes/product";
+import { TProduct } from "@types/product.types";
+
+import handleAxiosErr from "@utils/handleAxiosErr";
 
 type TResponse = TProduct[];
 
@@ -27,9 +29,7 @@ const getCartProducts = createAsyncThunk(
       );
       return response.data;
     } catch (err) {
-      if (axios.isAxiosError(err))
-        return rejectWithValue(err.response?.data.message || err.message);
-      else return rejectWithValue("Un Expected Error");
+      return rejectWithValue(handleAxiosErr(err));
     }
   }
 );

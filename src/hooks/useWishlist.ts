@@ -12,9 +12,10 @@ export default function useWishlist() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getWishlistItems());
+    const promise = dispatch(getWishlistItems());
 
     return () => {
+      promise.abort();
       dispatch(cleanUpProducts());
     };
   }, [dispatch]);

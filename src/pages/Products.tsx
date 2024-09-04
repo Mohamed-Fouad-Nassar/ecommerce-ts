@@ -5,7 +5,7 @@ import Product from "@components/eCommerce/Products/Product";
 
 import useProducts from "@hooks/useProducts";
 
-import { TProduct } from "@customTypes/product";
+import { TProduct } from "@types/product.types";
 
 export default function Products() {
   const { prefix, loading, error, productsWithQty: products } = useProducts();

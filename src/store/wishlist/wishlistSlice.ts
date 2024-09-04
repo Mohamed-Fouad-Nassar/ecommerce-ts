@@ -2,9 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import { toggleLike } from "./actions/toggleLike";
 
-import { TProduct } from "@customTypes/product";
+import { TProduct } from "@types/product.types";
+import { isString } from "@types/guards.types";
+import { TError, TLoading } from "@types/shared.types";
 
-import { TError, TLoading } from "@customTypes/shared";
 import { getWishlistItems } from "./actions/getWishlistItems";
 
 type TList = {
@@ -46,9 +47,7 @@ export const wishlistSlice = createSlice({
         );
       })
       .addCase(toggleLike.rejected, (state, action) => {
-        // state.error = action.payload as string;
-        if (action.payload && typeof action.payload === "string")
-          state.error = action.payload;
+        if (isString(action.payload)) state.error = action.payload;
       });
 
     builder
@@ -62,11 +61,8 @@ export const wishlistSlice = createSlice({
         state.products = action.payload;
       })
       .addCase(getWishlistItems.rejected, (state, action) => {
-        // state.loading = "failed";
-        // state.error = action.payload as string;
         state.loading = "failed";
-        if (action.payload && typeof action.payload === "string")
-          state.error = action.payload;
+        if (isString(action.payload)) state.error = action.payload;
       });
   },
 });

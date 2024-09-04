@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { TProduct } from "@customTypes/product";
-import { TError, TLoading } from "@customTypes/shared";
+import { isString } from "@types/guards.types";
+import { TProduct } from "@types/product.types";
+import { TError, TLoading } from "@types/shared.types";
 
 import getProductsByPrefix from "./actions/getProductsByPrefix";
 
@@ -39,18 +40,10 @@ export const productsSlice = createSlice({
       })
       .addCase(getProductsByPrefix.rejected, (state, action) => {
         state.loading = "failed";
-        state.error = action.payload as string;
+        if (isString(action.payload)) state.error = action.payload;
       }),
 });
 
 export const { cleanUpProducts } = productsSlice.actions;
 export { getProductsByPrefix };
 export default productsSlice.reducer;
-
-//  {
-//       "id": 1,
-//       "title": "Regular Fit Jersey top",
-//       "price": "249.00",
-//       "cat_prefix": "men",
-//       "img": "https://eg.hm.com/assets/styles/HNM/14482498/6103a8463876770c30cdba3535b7be1f333315fe/2/image-thumb__3464789__product_listing/cb91f8f128ac2125e0ec3a008a2e8d2497d15434.jpg"
-//     },

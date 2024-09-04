@@ -26,9 +26,10 @@ export default function useProducts() {
   }));
 
   useEffect(() => {
-    dispatch(getProductsByPrefix(prefix as string));
+    const promise = dispatch(getProductsByPrefix(prefix as string));
 
     return () => {
+      promise.abort();
       dispatch(cleanUpProducts());
     };
   }, [dispatch, prefix]);

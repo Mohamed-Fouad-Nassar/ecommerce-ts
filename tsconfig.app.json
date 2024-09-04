@@ -26,17 +26,17 @@
     /* Absolute path imports */
     "baseUrl": ".",
     "paths": {
-      "@assets/*": ["src/assets/*"],
-      "@components/*": ["src/components/*"],
+      "@types/*": ["src/types/*"],
       "@hooks/*": ["src/hooks/*"],
       "@pages/*": ["src/pages/*"],
-      "@routes/*": ["src/routes/*"],
       "@store/*": ["src/store/*"],
+      "@utils/*": ["src/utils/*"],
+      "@routes/*": ["src/routes/*"],
+      "@assets/*": ["src/assets/*"],
       "@styles/*": ["src/styles/*"],
       "@layouts/*": ["src/layouts/*"],
-      "@util/*": ["src/util/*"],
       "@services/*": ["src/services/*"],
-      "@customTypes/*": ["src/types/*"]
+      "@components/*": ["src/components/*"]
     }
   },
   "include": ["src"]

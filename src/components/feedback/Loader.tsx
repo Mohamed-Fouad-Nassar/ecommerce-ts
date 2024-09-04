@@ -2,7 +2,7 @@ import { Alert } from "react-bootstrap";
 
 import SpinnerFullPage from "@components/ui/SpinnerFullPage";
 
-import { TError, TLoading } from "@customTypes/shared";
+import { TError, TLoading } from "@types/shared.types";
 
 type LoaderProps = {
   loading: TLoading;

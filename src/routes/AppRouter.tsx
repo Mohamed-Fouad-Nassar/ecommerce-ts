@@ -1,31 +1,46 @@
+import SpinnerFullPage from "@components/ui/SpinnerFullPage";
+import { lazy, Suspense } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import MainLayout from "@layouts/MainLayout";
+const MainLayout = lazy(() => import("@layouts/MainLayout"));
 
-import Cart from "@pages/Cart";
-import Home from "@pages/Home";
-import Login from "@pages/Login";
-import About from "@pages/About";
-import Product from "@pages/Product";
-import Register from "@pages/Register";
-import Products from "@pages/Products";
-import Wishlist from "@pages/Wishlist";
+const Cart = lazy(() => import("@pages/Cart"));
+const Home = lazy(() => import("@pages/Home"));
+const Login = lazy(() => import("@pages/Login"));
+const About = lazy(() => import("@pages/About"));
+const Product = lazy(() => import("@pages/Product"));
+const Register = lazy(() => import("@pages/Register"));
+const Products = lazy(() => import("@pages/Products"));
+const Wishlist = lazy(() => import("@pages/Wishlist"));
+const Categories = lazy(() => import("@pages/Categories"));
+
 import ErrorPage from "@pages/ErrorPage";
-import Categories from "@pages/Categories";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <MainLayout />,
+    element: (
+      <Suspense fallback={<SpinnerFullPage />}>
+        <MainLayout />
+      </Suspense>
+    ),
     errorElement: <ErrorPage />,
     children: [
       {
         index: true,
-        element: <Home />,
+        element: (
+          <Suspense fallback={<SpinnerFullPage />}>
+            <Home />
+          </Suspense>
+        ),
       },
       {
         path: "products/:prefix",
-        element: <Products />,
+        element: (
+          <Suspense fallback={<SpinnerFullPage />}>
+            <Products />
+          </Suspense>
+        ),
         loader: ({ params }) => {
           if (
             typeof params.prefix !== "string" ||
@@ -41,31 +56,59 @@ const router = createBrowserRouter([
       },
       {
         path: "products/:prefix/:productId",
-        element: <Product />,
+        element: (
+          <Suspense fallback={<SpinnerFullPage />}>
+            <Product />
+          </Suspense>
+        ),
       },
       {
         path: "categories",
-        element: <Categories />,
+        element: (
+          <Suspense fallback={<SpinnerFullPage />}>
+            <Categories />
+          </Suspense>
+        ),
       },
       {
         path: "about-us",
-        element: <About />,
+        element: (
+          <Suspense fallback={<SpinnerFullPage />}>
+            <About />
+          </Suspense>
+        ),
       },
       {
         path: "cart",
-        element: <Cart />,
+        element: (
+          <Suspense fallback={<SpinnerFullPage />}>
+            <Cart />
+          </Suspense>
+        ),
       },
       {
         path: "wishlist",
-        element: <Wishlist />,
+        element: (
+          <Suspense fallback={<SpinnerFullPage />}>
+            <Wishlist />
+          </Suspense>
+        ),
       },
       {
         path: "login",
-        element: <Login />,
+        element: (
+          <Suspense fallback={<SpinnerFullPage />}>
+            <Login />
+          </Suspense>
+        ),
       },
       {
         path: "register",
-        element: <Register />,
+        element: (
+          <Suspense fallback={<SpinnerFullPage />}>
+            <Register />
+          </Suspense>
+        ),
       },
     ],
   },

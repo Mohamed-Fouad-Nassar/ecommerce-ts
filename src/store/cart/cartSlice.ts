@@ -3,9 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 import getTotalCartItemsCart from "./selectors/getTotalCartItemsCartSelector";
 import getAvailableItemsQty from "./selectors/getAvailableItemsQuantitySelector";
 
-import { TProduct } from "@customTypes/product";
+import { isString } from "@types/guards.types";
+import { TProduct } from "@types/product.types";
+import { TError, TLoading } from "@types/shared.types";
+
 import getCartProducts from "./actions/getCartProducts";
-import { TError, TLoading } from "@customTypes/shared";
 
 type CartState = {
   items: { [key: string]: number };
@@ -58,8 +60,7 @@ const cartSlice = createSlice({
       })
       .addCase(getCartProducts.rejected, (state, action) => {
         state.loading = "failed";
-        if (action.payload && typeof action.payload === "string")
-          state.error = action.payload;
+        if (isString(action.payload)) state.error = action.payload;
       });
   },
 });
