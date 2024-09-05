@@ -2,7 +2,7 @@ import Heading from "@components/ui/Heading";
 import GridList from "@components/ui/GridList";
 import Loader from "@components/feedback/Loader";
 import Product from "@components/eCommerce/Products/Product";
-import LottieHandler from "@components/feedback/lottieHandler";
+import LottieHandler from "@components/feedback/LottieHandler";
 
 import useWishlist from "@hooks/useWishlist";
 
