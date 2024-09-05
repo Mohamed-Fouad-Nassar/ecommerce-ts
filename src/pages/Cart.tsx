@@ -1,7 +1,7 @@
 import Heading from "@components/ui/Heading";
 import Loader from "@components/feedback/Loader";
 import CartList from "@components/eCommerce/cart/CartList";
-
+import LottieHandler from "@components/feedback/lottieHandler";
 import CartSubTotal from "@components/eCommerce/cart/CartSubTotal";
 
 import useCart from "@hooks/useCart";
@@ -30,7 +30,10 @@ export default function Cart() {
             <CartSubTotal products={products} />
           </>
         ) : (
-          "Your cart is empty. please, start add some products"
+          <LottieHandler
+            type="empty"
+            message="Your cart is empty. please, start add some products"
+          />
         )}
       </Loader>
     </>

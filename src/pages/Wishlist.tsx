@@ -2,6 +2,7 @@ import Heading from "@components/ui/Heading";
 import GridList from "@components/ui/GridList";
 import Loader from "@components/feedback/Loader";
 import Product from "@components/eCommerce/Products/Product";
+import LottieHandler from "@components/feedback/lottieHandler";
 
 import useWishlist from "@hooks/useWishlist";
 
@@ -21,7 +22,10 @@ export default function Wishlist() {
             error="there are no products."
           />
         ) : (
-          "Your wishlist is empty. please, start add some products"
+          <LottieHandler
+            type="noResult"
+            message="Your wishlist is empty. please, start add some products"
+          />
         )}
       </Loader>
     </>

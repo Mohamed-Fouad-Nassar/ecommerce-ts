@@ -3,7 +3,7 @@ import { Spinner } from "react-bootstrap";
 import styles from "./spinnerFullPage.module.css";
 const { wrapper } = styles;
 
-export default function SpinnerFullPage() {
+export default function SpinnerFullPage({ message }: { message?: string }) {
   return (
     <div className={wrapper}>
       <Spinner
@@ -13,6 +13,8 @@ export default function SpinnerFullPage() {
       >
         <span className="visually-hidden">Loading...</span>
       </Spinner>
+
+      {message && <h3 className="">{message}</h3>}
     </div>
   );
 }

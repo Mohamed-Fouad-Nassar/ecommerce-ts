@@ -1,6 +1,7 @@
-import SpinnerFullPage from "@components/ui/SpinnerFullPage";
 import { lazy, Suspense } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
+import SpinnerFullPage from "@components/ui/SpinnerFullPage";
 
 const MainLayout = lazy(() => import("@layouts/MainLayout"));
 
@@ -20,7 +21,9 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <Suspense fallback={<SpinnerFullPage />}>
+      <Suspense
+        fallback={<SpinnerFullPage message="Loading, please wait...." />}
+      >
         <MainLayout />
       </Suspense>
     ),

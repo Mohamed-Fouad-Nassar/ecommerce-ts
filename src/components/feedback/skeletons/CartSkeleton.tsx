@@ -6,7 +6,7 @@ const { cartItem } = styles;
 export default function CartSkeleton() {
   const skeleton = Array(3)
     .fill(0)
-    .map(({ i }) => (
+    .map((_, i) => (
       <div className={cartItem} key={i}>
         <ContentLoader
           speed={2}

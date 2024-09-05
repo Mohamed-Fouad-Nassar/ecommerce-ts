@@ -4,13 +4,13 @@ import ContentLoader from "react-content-loader";
 export default function ProductSkeleton() {
   const skeleton = Array(4)
     .fill(0)
-    .map(({ i }) => (
+    .map((_, i) => (
       <Col
+        key={i}
         xs={12}
         sm={6}
         md={4}
         lg={3}
-        key={i}
         className="d-flex justify-content-center mb-5 mt-2"
       >
         <ContentLoader
