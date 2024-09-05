@@ -13,7 +13,7 @@ export default function Wishlist() {
   return (
     <>
       <Heading title="your wishlist" />
-      <Loader error={error} loading={loading}>
+      <Loader error={error} loading={loading} type="products">
         {products.length > 0 ? (
           <GridList<TProduct>
             data={products}

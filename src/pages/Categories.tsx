@@ -14,7 +14,7 @@ export default function Categories() {
     <>
       <Heading title="categories" />
 
-      <Loader loading={loading} error={error}>
+      <Loader loading={loading} error={error} type="categories">
         <GridList<TCategory>
           data={categories}
           renderItem={(category) => (

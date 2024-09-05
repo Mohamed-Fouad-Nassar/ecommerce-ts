@@ -20,15 +20,13 @@ const navTwo = [
 export default function Header() {
   return (
     <header>
-      <div>
-        <Container className={headerContainer}>
-          <h1 className={headerLogo}>
-            <span>Our</span> <Badge bg="info">eCom</Badge>
-          </h1>
+      <Container className={headerContainer}>
+        <h1 className={headerLogo}>
+          <span>Our</span> <Badge bg="info">eCom</Badge>
+        </h1>
 
-          <HeaderDataSec />
-        </Container>
-      </div>
+        <HeaderDataSec />
+      </Container>
 
       <Navbar
         expand="lg"

@@ -14,7 +14,7 @@ export default function Products() {
     <>
       <Heading title={`${prefix} products`} />
 
-      <Loader loading={loading} error={error}>
+      <Loader loading={loading} error={error} type="products">
         <GridList<TProduct>
           data={products}
           renderItem={(product) => <Product key={product.id} {...product} />}

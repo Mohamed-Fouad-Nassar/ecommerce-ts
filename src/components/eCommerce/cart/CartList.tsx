@@ -5,7 +5,6 @@ import { TProduct } from "@customTypes/product.types";
 type Products = TProduct & { quantity: number };
 
 type CartListProps = {
-  // products: TProduct[];
   products: Products[];
   handleChangeQty: (id: number, quantity: number) => void;
   handleRemoveFromCart: (id: number) => void;
