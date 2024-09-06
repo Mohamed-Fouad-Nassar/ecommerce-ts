@@ -1,7 +1,5 @@
-import { lazy, Suspense } from "react";
+import { lazy } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
-import SpinnerFullPage from "@components/ui/SpinnerFullPage";
 
 const MainLayout = lazy(() => import("@layouts/MainLayout"));
 
@@ -17,32 +15,32 @@ const Categories = lazy(() => import("@pages/Categories"));
 
 import ErrorPage from "@pages/ErrorPage";
 
+import SuspenseFallback from "@components/feedback/SuspenseFallback";
+
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <Suspense
-        fallback={<SpinnerFullPage message="Loading, please wait...." />}
-      >
+      <SuspenseFallback>
         <MainLayout />
-      </Suspense>
+      </SuspenseFallback>
     ),
     errorElement: <ErrorPage />,
     children: [
       {
         index: true,
         element: (
-          <Suspense fallback={<SpinnerFullPage />}>
+          <SuspenseFallback>
             <Home />
-          </Suspense>
+          </SuspenseFallback>
         ),
       },
       {
         path: "products/:prefix",
         element: (
-          <Suspense fallback={<SpinnerFullPage />}>
+          <SuspenseFallback>
             <Products />
-          </Suspense>
+          </SuspenseFallback>
         ),
         loader: ({ params }) => {
           if (
@@ -60,57 +58,57 @@ const router = createBrowserRouter([
       {
         path: "products/:prefix/:productId",
         element: (
-          <Suspense fallback={<SpinnerFullPage />}>
+          <SuspenseFallback>
             <Product />
-          </Suspense>
+          </SuspenseFallback>
         ),
       },
       {
         path: "categories",
         element: (
-          <Suspense fallback={<SpinnerFullPage />}>
+          <SuspenseFallback>
             <Categories />
-          </Suspense>
+          </SuspenseFallback>
         ),
       },
       {
         path: "about-us",
         element: (
-          <Suspense fallback={<SpinnerFullPage />}>
+          <SuspenseFallback>
             <About />
-          </Suspense>
+          </SuspenseFallback>
         ),
       },
       {
         path: "cart",
         element: (
-          <Suspense fallback={<SpinnerFullPage />}>
+          <SuspenseFallback>
             <Cart />
-          </Suspense>
+          </SuspenseFallback>
         ),
       },
       {
         path: "wishlist",
         element: (
-          <Suspense fallback={<SpinnerFullPage />}>
+          <SuspenseFallback>
             <Wishlist />
-          </Suspense>
+          </SuspenseFallback>
         ),
       },
       {
         path: "login",
         element: (
-          <Suspense fallback={<SpinnerFullPage />}>
+          <SuspenseFallback>
             <Login />
-          </Suspense>
+          </SuspenseFallback>
         ),
       },
       {
         path: "register",
         element: (
-          <Suspense fallback={<SpinnerFullPage />}>
+          <SuspenseFallback>
             <Register />
-          </Suspense>
+          </SuspenseFallback>
         ),
       },
     ],

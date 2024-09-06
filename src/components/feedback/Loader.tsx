@@ -1,4 +1,4 @@
-import { Alert } from "react-bootstrap";
+// import { Alert } from "react-bootstrap";
 
 import SpinnerFullPage from "@components/ui/SpinnerFullPage";
 
@@ -7,6 +7,7 @@ import ProductSkeleton from "./skeletons/ProductSkeleton";
 import CategorySkeleton from "./skeletons/CategorySkeleton";
 
 import { TError, TLoading } from "@customTypes/shared.types";
+import LottieHandler from "./LottieHandler";
 
 const skeletonTypes = {
   products: ProductSkeleton,
@@ -32,9 +33,16 @@ export default function Loader({
 
   if (loading === "pending") return <Component />;
 
-  if (loading === "failed") {
-    return <Alert variant="danger">{error}</Alert>;
-  }
+  // if (loading === "failed") return <Alert variant="danger">{error}</Alert>;
+
+  if (loading === "failed")
+    return (
+      <LottieHandler
+        type="error"
+        message={error as string}
+        lottieStyle={{ width: "300px" }}
+      />
+    );
 
   return children;
 }

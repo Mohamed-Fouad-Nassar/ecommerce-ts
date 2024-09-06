@@ -1,7 +1,7 @@
 import Heading from "@components/ui/Heading";
 import Loader from "@components/feedback/Loader";
 import CartList from "@components/eCommerce/cart/CartList";
-import LottieHandler from "@components/feedback/lottieHandler";
+import LottieHandler from "@components/feedback/LottieHandler";
 import CartSubTotal from "@components/eCommerce/cart/CartSubTotal";
 
 import useCart from "@hooks/useCart";
@@ -33,6 +33,7 @@ export default function Cart() {
           <LottieHandler
             type="empty"
             message="Your cart is empty. please, start add some products"
+            lottieStyle={{ width: "230px" }}
           />
         )}
       </Loader>
