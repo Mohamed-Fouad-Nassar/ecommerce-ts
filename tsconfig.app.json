@@ -36,7 +36,8 @@
       "@layouts/*": ["src/layouts/*"],
       "@services/*": ["src/services/*"],
       "@customTypes/*": ["src/types/*"],
-      "@components/*": ["src/components/*"]
+      "@components/*": ["src/components/*"],
+      "@validations/*": ["src/validations/*"]
     }
   },
   "include": ["src"]

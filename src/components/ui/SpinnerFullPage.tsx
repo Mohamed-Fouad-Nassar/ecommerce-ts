@@ -14,7 +14,7 @@ export default function SpinnerFullPage({ message }: { message?: string }) {
         <span className="visually-hidden">Loading...</span>
       </Spinner>
 
-      {message && <h5>{message}</h5>}
+      {message && <h5 className="mt-2">{message}</h5>}
     </div>
   );
 }
