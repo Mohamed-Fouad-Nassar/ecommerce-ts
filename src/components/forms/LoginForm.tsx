@@ -1,8 +1,13 @@
+import { useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Button, Form, Row, Col } from "react-bootstrap";
+import { Button, Form, Row, Col, Alert, Spinner } from "react-bootstrap";
 
 import Input from "@components/ui/Input";
+
+import { login, resetUi } from "@store/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "@store/hooks";
 
 import { LoginFormTypes, loginSchema } from "@validations/loginSchema";
 
@@ -15,20 +20,34 @@ export default function LoginForm() {
     mode: "onBlur",
     resolver: zodResolver(loginSchema),
   });
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const { loading, error, accessToken } = useAppSelector((state) => state.auth);
 
-  const submitForm: SubmitHandler<LoginFormTypes> = (data) => {
-    console.log(data);
+  const submitForm: SubmitHandler<LoginFormTypes> = async (data) => {
+    dispatch(login(data))
+      .unwrap()
+      .then(() => navigate("/"));
   };
+
+  useEffect(() => {
+    dispatch(resetUi());
+  }, [dispatch]);
+
+  if (accessToken) return <Navigate to="/" />;
 
   return (
     <Row>
       <Col lg={{ span: 8, offset: 2 }}>
+        {error && <Alert variant="danger">{error}</Alert>}
+
         <Form onSubmit={handleSubmit(submitForm)}>
           <Input
             name="email"
             label="Your Email"
             register={register}
             error={errors?.email?.message}
+            disabled={loading === "pending"}
           />
 
           <Input
@@ -37,45 +56,38 @@ export default function LoginForm() {
             label="Password"
             register={register}
             error={errors?.password?.message}
+            disabled={loading === "pending"}
           />
 
           <Button
             variant="info"
             type="submit"
-            style={{ color: "white", display: "block", marginLeft: "auto" }}
+            style={{
+              color: "white",
+              display: "block",
+              marginLeft: "auto",
+              fontSize: "large",
+            }}
+            disabled={loading === "pending"}
           >
-            Log in
+            {loading === "pending" ? (
+              <>
+                <Spinner
+                  size="sm"
+                  animation="border"
+                  role="status"
+                  color="white"
+                >
+                  <span className="visually-hidden">Loading...</span>
+                </Spinner>{" "}
+                Loading...
+              </>
+            ) : (
+              "Log in"
+            )}
           </Button>
         </Form>
       </Col>
     </Row>
   );
 }
-
-// <Form.Floating className="mb-3">
-//   <Form.Control
-//     id="floatingInputCustom"
-//     type="email"
-//     placeholder="name@example.com"
-//     {...register("email")}
-//     isInvalid={errors?.email?.message ? true : false}
-//   />
-//   <label htmlFor="floatingInputCustom">Email address</label>
-//   <Form.Control.Feedback type="invalid">
-//     {errors?.email?.message}
-//   </Form.Control.Feedback>
-// </Form.Floating>
-
-// <Form.Floating className="mb-3">
-//   <Form.Control
-//     id="floatingPasswordCustom"
-//     type="password"
-//     placeholder="Password"
-//     {...register("password")}
-//     isInvalid={errors?.password?.message ? true : false}
-//   />
-//   <label htmlFor="floatingPasswordCustom">Password</label>
-//   <Form.Control.Feedback type="invalid">
-//     {errors?.password?.message}
-//   </Form.Control.Feedback>
-// </Form.Floating>

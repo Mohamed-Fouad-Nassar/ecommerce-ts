@@ -1,11 +1,17 @@
+import { useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Button, Form, Row, Col } from "react-bootstrap";
+import { Button, Form, Row, Col, Spinner, Alert } from "react-bootstrap";
 
 import Input from "@components/ui/Input";
 
-import { RegisterFormTypes, registerSchema } from "@validations/registerSchema";
+import { useAppDispatch, useAppSelector } from "@store/hooks";
+import { register as authRegister, resetUi } from "@store/auth/authSlice";
+
 import useCheckEmailAvailability from "@hooks/useCheckEmailAvailability";
+
+import { RegisterFormTypes, registerSchema } from "@validations/registerSchema";
 
 export default function RegisterForm() {
   const {
@@ -18,6 +24,9 @@ export default function RegisterForm() {
     mode: "onBlur",
     resolver: zodResolver(registerSchema),
   });
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const { loading, error, accessToken } = useAppSelector((state) => state.auth);
 
   const {
     prevEmail,
@@ -37,19 +46,31 @@ export default function RegisterForm() {
     if (isDirty && invalid && prevEmail) resetEmailAvailability();
   };
 
-  const SubmitForm: SubmitHandler<RegisterFormTypes> = (data) => {
-    console.log(data);
+  const SubmitForm: SubmitHandler<RegisterFormTypes> = async (data) => {
+    const { firstName, lastName, email, password } = data;
+    dispatch(authRegister({ email, password, firstName, lastName }))
+      .unwrap()
+      .then(() => navigate("/login"));
   };
+
+  useEffect(() => {
+    dispatch(resetUi());
+  }, [dispatch]);
+
+  if (accessToken) return <Navigate to="/" />;
 
   return (
     <Row>
       <Col lg={{ span: 8, offset: 2 }}>
+        {error && <Alert variant="danger">{error}</Alert>}
+
         <Form onSubmit={handleSubmit(SubmitForm)}>
           <Input
             name="firstName"
             label="First Name"
             register={register}
             error={errors?.firstName?.message}
+            disabled={loading === "pending"}
           />
 
           <Input
@@ -57,6 +78,7 @@ export default function RegisterForm() {
             label="Last Name"
             register={register}
             error={errors?.lastName?.message}
+            disabled={loading === "pending"}
           />
 
           <Input
@@ -64,7 +86,7 @@ export default function RegisterForm() {
             register={register}
             label="Email Address"
             onBlur={handleOnBlurEmail}
-            disabled={emailStatus === "checking"}
+            disabled={emailStatus === "checking" || loading === "pending"}
             error={
               errors?.email?.message
                 ? errors?.email?.message
@@ -92,6 +114,7 @@ export default function RegisterForm() {
             label="Password"
             register={register}
             error={errors?.password?.message}
+            disabled={loading === "pending"}
           />
 
           <Input
@@ -100,76 +123,38 @@ export default function RegisterForm() {
             label="Confirm Password"
             register={register}
             error={errors?.confirmPassword?.message}
+            disabled={loading === "pending"}
           />
 
           <Button
             variant="info"
             type="submit"
-            style={{ color: "white", display: "block", marginLeft: "auto" }}
-            disabled={emailStatus === "checking"}
+            style={{
+              color: "white",
+              display: "block",
+              marginLeft: "auto",
+              fontSize: "large",
+            }}
+            disabled={emailStatus === "checking" || loading === "pending"}
           >
-            Register
+            {loading === "pending" ? (
+              <>
+                <Spinner
+                  size="sm"
+                  animation="border"
+                  role="status"
+                  color="white"
+                >
+                  <span className="visually-hidden">Loading...</span>
+                </Spinner>{" "}
+                Loading...
+              </>
+            ) : (
+              "Register"
+            )}
           </Button>
         </Form>
       </Col>
     </Row>
   );
-}
-
-{
-  /* <Form.Group className="mb-3">
-<Form.Label>First Name</Form.Label>
-<Form.Control
-type="text"
-{...register("firstName")}
-isInvalid={errors?.firstName?.message ? true : false}
-/>
-<Form.Control.Feedback type="invalid">
-{errors?.firstName?.message}
-</Form.Control.Feedback>
-</Form.Group>
-<Form.Group className="mb-3">
-<Form.Label>Last Name</Form.Label>
-<Form.Control
-type="text"
-{...register("lastName")}
-isInvalid={errors?.lastName?.message ? true : false}
-/>
-<Form.Control.Feedback type="invalid">
-{errors?.lastName?.message}
-</Form.Control.Feedback>
-</Form.Group>
-<Form.Group className="mb-3">
-<Form.Label>Email address</Form.Label>
-<Form.Control
-type="email"
-{...register("email")}
-isInvalid={errors?.email?.message ? true : false}
-/>
-<Form.Control.Feedback type="invalid">
-{errors?.email?.message}
-</Form.Control.Feedback>
-</Form.Group>
-<Form.Group className="mb-3">
-<Form.Label>Password</Form.Label>
-<Form.Control
-type="password"
-{...register("password")}
-isInvalid={errors?.password?.message ? true : false}
-/>
-<Form.Control.Feedback type="invalid">
-{errors?.password?.message}
-</Form.Control.Feedback>
-</Form.Group>
-<Form.Group className="mb-3">
-<Form.Label>Confirm Password</Form.Label>
-<Form.Control
-type="confirmPassword"
-{...register("confirmPassword")}
-isInvalid={errors?.confirmPassword?.message ? true : false}
-/>
-<Form.Control.Feedback type="invalid">
-{errors?.confirmPassword?.message}
-</Form.Control.Feedback>
-</Form.Group> */
 }

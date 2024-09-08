@@ -7,6 +7,8 @@ const Cart = lazy(() => import("@pages/Cart"));
 const Home = lazy(() => import("@pages/Home"));
 const Login = lazy(() => import("@pages/Login"));
 const About = lazy(() => import("@pages/About"));
+const Orders = lazy(() => import("@pages/Orders"));
+const Profile = lazy(() => import("@pages/Profile"));
 const Product = lazy(() => import("@pages/Product"));
 const Register = lazy(() => import("@pages/Register"));
 const Products = lazy(() => import("@pages/Products"));
@@ -15,6 +17,7 @@ const Categories = lazy(() => import("@pages/Categories"));
 
 import ErrorPage from "@pages/ErrorPage";
 
+import ProtectedRoute from "@components/auth/ProtectedRoute";
 import SuspenseFallback from "@components/feedback/SuspenseFallback";
 
 const router = createBrowserRouter([
@@ -90,9 +93,31 @@ const router = createBrowserRouter([
       {
         path: "wishlist",
         element: (
-          <SuspenseFallback>
-            <Wishlist />
-          </SuspenseFallback>
+          <ProtectedRoute>
+            <SuspenseFallback>
+              <Wishlist />
+            </SuspenseFallback>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "orders",
+        element: (
+          <ProtectedRoute>
+            <SuspenseFallback>
+              <Orders />
+            </SuspenseFallback>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "profile",
+        element: (
+          <ProtectedRoute>
+            <SuspenseFallback>
+              <Profile />
+            </SuspenseFallback>
+          </ProtectedRoute>
         ),
       },
       {

@@ -23,7 +23,6 @@ export default function useCheckEmailAvailability() {
       if (!response.data.length) setEmailStatus("available");
       else setEmailStatus("notAvailable");
     } catch (err) {
-      console.log(err);
       setEmailStatus("failed");
     }
   };

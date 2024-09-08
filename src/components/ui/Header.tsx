@@ -4,17 +4,13 @@ import { Badge, Container, Nav, Navbar } from "react-bootstrap";
 import HeaderDataSec from "@components/eCommerce/common/HeaderDataSec";
 
 import styles from "./header.module.css";
+import HeaderRightSec from "./HeaderRightSec";
 const { headerContainer, headerLogo } = styles;
 
-const navOne = [
+const nav = [
   { title: "Home", path: "/" },
   { title: "Categories", path: "/categories" },
   { title: "About", path: "/about-us" },
-];
-
-const navTwo = [
-  { title: "Login", path: "/login" },
-  { title: "Register", path: "/register" },
 ];
 
 export default function Header() {
@@ -38,19 +34,14 @@ export default function Header() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              {navOne.map(({ title, path }) => (
+              {nav.map(({ title, path }) => (
                 <Nav.Link key={title} as={NavLink} to={path}>
                   {title}
                 </Nav.Link>
               ))}
             </Nav>
-            <Nav>
-              {navTwo.map(({ title, path }) => (
-                <Nav.Link key={title} as={NavLink} to={path}>
-                  {title}
-                </Nav.Link>
-              ))}
-            </Nav>
+
+            <HeaderRightSec />
           </Navbar.Collapse>
         </Container>
       </Navbar>
