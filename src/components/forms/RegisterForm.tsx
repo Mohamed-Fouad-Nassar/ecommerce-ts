@@ -1,61 +1,22 @@
-import { useEffect } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Navigate, useNavigate } from "react-router-dom";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { Navigate } from "react-router-dom";
 import { Button, Form, Row, Col, Spinner, Alert } from "react-bootstrap";
 
 import Input from "@components/ui/Input";
 
-import { useAppDispatch, useAppSelector } from "@store/hooks";
-import { register as authRegister, resetUi } from "@store/auth/authSlice";
-
-import useCheckEmailAvailability from "@hooks/useCheckEmailAvailability";
-
-import { RegisterFormTypes, registerSchema } from "@validations/registerSchema";
+import useRegister from "@hooks/useRegister";
 
 export default function RegisterForm() {
   const {
-    trigger,
+    error,
+    errors,
+    loading,
     register,
-    handleSubmit,
-    getFieldState,
-    formState: { errors },
-  } = useForm<RegisterFormTypes>({
-    mode: "onBlur",
-    resolver: zodResolver(registerSchema),
-  });
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  const { loading, error, accessToken } = useAppSelector((state) => state.auth);
-
-  const {
-    prevEmail,
+    SubmitForm,
+    accessToken,
     emailStatus,
-    checkEmailAvailability,
-    resetEmailAvailability,
-  } = useCheckEmailAvailability();
-
-  const handleOnBlurEmail = async (e: React.FocusEvent<HTMLInputElement>) => {
-    await trigger("email");
-    const value = e.target.value;
-    const { isDirty, invalid } = getFieldState("email");
-
-    if (isDirty && !invalid && prevEmail !== value)
-      checkEmailAvailability(value);
-
-    if (isDirty && invalid && prevEmail) resetEmailAvailability();
-  };
-
-  const SubmitForm: SubmitHandler<RegisterFormTypes> = async (data) => {
-    const { firstName, lastName, email, password } = data;
-    dispatch(authRegister({ email, password, firstName, lastName }))
-      .unwrap()
-      .then(() => navigate("/login"));
-  };
-
-  useEffect(() => {
-    dispatch(resetUi());
-  }, [dispatch]);
+    handleSubmit,
+    handleOnBlurEmail,
+  } = useRegister();
 
   if (accessToken) return <Navigate to="/" />;
 
@@ -144,9 +105,7 @@ export default function RegisterForm() {
                   animation="border"
                   role="status"
                   color="white"
-                >
-                  <span className="visually-hidden">Loading...</span>
-                </Spinner>{" "}
+                />{" "}
                 Loading...
               </>
             ) : (

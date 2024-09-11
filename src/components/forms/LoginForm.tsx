@@ -1,38 +1,20 @@
-import { useEffect } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Navigate, useNavigate } from "react-router-dom";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { Navigate } from "react-router-dom";
 import { Button, Form, Row, Col, Alert, Spinner } from "react-bootstrap";
 
 import Input from "@components/ui/Input";
 
-import { login, resetUi } from "@store/auth/authSlice";
-import { useAppDispatch, useAppSelector } from "@store/hooks";
-
-import { LoginFormTypes, loginSchema } from "@validations/loginSchema";
+import useLogin from "@hooks/useLogin";
 
 export default function LoginForm() {
   const {
+    error,
+    errors,
+    loading,
     register,
+    submitForm,
+    accessToken,
     handleSubmit,
-    formState: { errors },
-  } = useForm<LoginFormTypes>({
-    mode: "onBlur",
-    resolver: zodResolver(loginSchema),
-  });
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  const { loading, error, accessToken } = useAppSelector((state) => state.auth);
-
-  const submitForm: SubmitHandler<LoginFormTypes> = async (data) => {
-    dispatch(login(data))
-      .unwrap()
-      .then(() => navigate("/"));
-  };
-
-  useEffect(() => {
-    dispatch(resetUi());
-  }, [dispatch]);
+  } = useLogin();
 
   if (accessToken) return <Navigate to="/" />;
 
@@ -77,9 +59,7 @@ export default function LoginForm() {
                   animation="border"
                   role="status"
                   color="white"
-                >
-                  <span className="visually-hidden">Loading...</span>
-                </Spinner>{" "}
+                />{" "}
                 Loading...
               </>
             ) : (

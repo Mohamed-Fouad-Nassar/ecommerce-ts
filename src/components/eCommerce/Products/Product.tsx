@@ -2,6 +2,7 @@ import { Button, Spinner } from "react-bootstrap";
 import { useEffect, useState, memo } from "react";
 // import { useNavigate } from "react-router-dom";
 
+import MyModal from "@components/ui/MyModal";
 // import Counter from "@components/ui/Counter";
 
 import Like from "@assets/svg/like.svg?react";
@@ -27,12 +28,16 @@ const Product = memo(function Product({
   max = 0,
   quantity = 0,
   isLiked,
+  isAuthorized,
 }: TProduct) {
   // const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const [isLoading, setIsLoading] = useState(false);
   const [isBtnDisabled, setIsBtnDisabled] = useState(false);
+
+  const [showModal, setShowModal] = useState(false);
+
   useEffect(() => {
     if (!isBtnDisabled) return;
 
@@ -48,9 +53,13 @@ const Product = memo(function Product({
     dispatch(addToCart(id));
   };
 
-  const handleLinkToggle = () => {
-    setIsLoading(true);
-    dispatch(toggleLike(id)).then(() => setIsLoading(false));
+  const handleLikeToggle = () => {
+    if (isAuthorized) {
+      setIsLoading(true);
+      dispatch(toggleLike(id))
+        .unwrap()
+        .then(() => setIsLoading(false));
+    } else setShowModal(true);
   };
 
   const remainingItems = max - quantity;
@@ -58,32 +67,49 @@ const Product = memo(function Product({
   // const isInCart = quantity > 0;
 
   return (
-    <div className={product}>
-      <div className={wishlistBtn} onClick={handleLinkToggle}>
-        {isLoading ? (
-          <Spinner animation="border" size="sm" variant="primary" />
-        ) : isLiked ? (
-          <LikeFill />
-        ) : (
-          <Like />
-        )}
+    <>
+      <MyModal
+        title="Login Required"
+        showModal={showModal}
+        setShowModal={setShowModal}
+      >
+        <MyModal.Body>
+          <p> You need to login first to add this item to your wishlist.</p>
+        </MyModal.Body>
 
-        {/* <Like /> */}
-      </div>
+        {/* <MyModal.Footer>
+          <Button onClick={() => setShowModal(false)} variant="primary">
+            Close
+          </Button>
+        </MyModal.Footer> */}
+      </MyModal>
 
-      <div className={productImg}>
-        <img src={img} alt={title} />
-      </div>
-      <h2>{title}</h2>
-      <h3>{price?.toFixed(2)} EGP</h3>
+      <div className={product}>
+        <div className={wishlistBtn} onClick={handleLikeToggle}>
+          {isLoading ? (
+            <Spinner animation="border" size="sm" variant="primary" />
+          ) : isLiked ? (
+            <LikeFill />
+          ) : (
+            <Like />
+          )}
 
-      <p className={maximumNotice}>
-        {isQtyReachedMax
-          ? "You reach to the limit"
-          : `You can add ${remainingItems} more item(s)`}
-      </p>
+          {/* <Like /> */}
+        </div>
 
-      {/* 
+        <div className={productImg}>
+          <img src={img} alt={title} />
+        </div>
+        <h2>{title}</h2>
+        <h3>{price?.toFixed(2)} EGP</h3>
+
+        <p className={maximumNotice}>
+          {isQtyReachedMax
+            ? "You reach to the limit"
+            : `You can add ${remainingItems} more item(s)`}
+        </p>
+
+        {/* 
       <Button
         onClick={() => navigate(`/products/${cat_prefix}/${id}`)}
         variant="info"
@@ -92,21 +118,21 @@ const Product = memo(function Product({
         view product
       </Button> */}
 
-      <Button
-        onClick={handleAddToCart}
-        variant="info"
-        disabled={isBtnDisabled || isQtyReachedMax}
-        style={{ color: "white" }}
-      >
-        {isBtnDisabled ? (
-          <span className="d-flex gap-2 justify-content-center align-items-center">
-            <Spinner animation="border" size="sm" /> Loading...
-          </span>
-        ) : (
-          "Add to cart"
-        )}
-      </Button>
-      {/* {isInCart ? (
+        <Button
+          onClick={handleAddToCart}
+          variant="info"
+          disabled={isBtnDisabled || isQtyReachedMax}
+          style={{ color: "white" }}
+        >
+          {isBtnDisabled ? (
+            <span className="d-flex gap-2 justify-content-center align-items-center">
+              <Spinner animation="border" size="sm" /> Loading...
+            </span>
+          ) : (
+            "Add to cart"
+          )}
+        </Button>
+        {/* {isInCart ? (
         <Counter
           disableIncrease={isBtnDisabled || isQtyReachedMax}
           disableDecrease={isBtnDisabled || isQtyReachedMax}
@@ -130,7 +156,8 @@ const Product = memo(function Product({
           )}
         </Button>
       )} */}
-    </div>
+      </div>
+    </>
   );
 });
 

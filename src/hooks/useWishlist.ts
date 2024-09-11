@@ -24,6 +24,7 @@ export default function useWishlist() {
     ...product,
     quantity: cartItems[product.id] || 0,
     isLiked: true,
+    isAuthorized: true,
   }));
 
   return { loading, error, finalProducts };

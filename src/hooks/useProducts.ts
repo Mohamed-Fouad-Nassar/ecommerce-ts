@@ -16,6 +16,7 @@ export default function useProducts() {
     error,
     records: products,
   } = useAppSelector((state) => state.products);
+  const { accessToken } = useAppSelector((state) => state.auth);
   const { items: cartItems } = useAppSelector((state) => state.cart);
   const { itemsId: wishlistItems } = useAppSelector((state) => state.wishlist);
 
@@ -23,6 +24,7 @@ export default function useProducts() {
     ...product,
     quantity: cartItems[product.id] || 0,
     isLiked: wishlistItems.includes(product.id),
+    isAuthorized: accessToken ? true : false,
   }));
 
   useEffect(() => {

@@ -7,6 +7,7 @@ import { isString } from "@customTypes/guards.types";
 import { TError, TLoading } from "@customTypes/shared.types";
 
 import { getWishlistItems } from "./actions/getWishlistItems";
+import { logout } from "@store/auth/authSlice";
 
 type TList = {
   error: TError;
@@ -31,6 +32,7 @@ export const wishlistSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    // Toggle Like
     builder
       .addCase(toggleLike.pending, (state) => {
         state.error = null;
@@ -50,6 +52,7 @@ export const wishlistSlice = createSlice({
         if (isString(action.payload)) state.error = action.payload;
       });
 
+    // Get Wishlist Items
     builder
       .addCase(getWishlistItems.pending, (state) => {
         state.loading = "pending";
@@ -59,11 +62,22 @@ export const wishlistSlice = createSlice({
         state.loading = "succeeded";
         state.error = null;
         state.products = action.payload;
+        state.itemsId = action.payload.map((el) => el.id);
       })
       .addCase(getWishlistItems.rejected, (state, action) => {
         state.loading = "failed";
         if (isString(action.payload)) state.error = action.payload;
       });
+
+    // get wishlist data on login
+
+    // reset wishlist data on logout
+    builder.addCase(logout, (state) => {
+      state.loading = "pending";
+      state.error = null;
+      state.itemsId = [];
+      state.products = [];
+    });
   },
 });
 
