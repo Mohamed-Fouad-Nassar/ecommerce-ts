@@ -1,6 +1,7 @@
 import { Modal } from "react-bootstrap";
 
 type MyModalProps = {
+  backdrop?: "static" | undefined;
   showModal: boolean;
   setShowModal: (show: boolean) => void;
   title: string;
@@ -8,13 +9,18 @@ type MyModalProps = {
 };
 
 export default function MyModal({
+  backdrop = undefined,
   title,
   children,
   showModal,
   setShowModal,
 }: MyModalProps) {
   return (
-    <Modal show={showModal} onHide={() => setShowModal(false)}>
+    <Modal
+      show={showModal}
+      backdrop={backdrop}
+      onHide={() => setShowModal(false)}
+    >
       <Modal.Header closeButton>
         <Modal.Title>{title}</Modal.Title>
       </Modal.Header>

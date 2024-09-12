@@ -100,12 +100,7 @@ export default function RegisterForm() {
           >
             {loading === "pending" ? (
               <>
-                <Spinner
-                  size="sm"
-                  animation="border"
-                  role="status"
-                  color="white"
-                />{" "}
+                <Spinner size="sm" animation="border" color="white" />{" "}
                 Loading...
               </>
             ) : (

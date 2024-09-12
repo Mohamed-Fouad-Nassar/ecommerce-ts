@@ -10,9 +10,11 @@ export default function Cart() {
   const {
     error,
     loading,
-    finalProducts: products,
     handleChangeQty,
+    handlePlaceOrder,
     handleRemoveFromCart,
+    finalProducts: products,
+    accessToken,
   } = useCart();
 
   return (
@@ -27,7 +29,11 @@ export default function Cart() {
               handleChangeQty={handleChangeQty}
               handleRemoveFromCart={handleRemoveFromCart}
             />
-            <CartSubTotal products={products} />
+            <CartSubTotal
+              products={products}
+              userAccessToken={accessToken}
+              handlePlaceOrder={handlePlaceOrder}
+            />
           </>
         ) : (
           <LottieHandler

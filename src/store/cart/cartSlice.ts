@@ -43,6 +43,13 @@ const cartSlice = createSlice({
       state.products = state.products.filter((el) => el.id !== id);
     },
 
+    clearCart: (state) => {
+      state.items = {};
+      state.error = null;
+      state.products = [];
+      state.loading = "idle";
+    },
+
     cleanUpCart: (state) => {
       state.products = [];
     },
@@ -68,5 +75,5 @@ const cartSlice = createSlice({
 export { getTotalCartItemsCart, getAvailableItemsQty, getCartProducts };
 
 export default cartSlice.reducer;
-export const { addToCart, changeQty, removeFromCart, cleanUpCart } =
+export const { addToCart, changeQty, removeFromCart, cleanUpCart, clearCart } =
   cartSlice.actions;

@@ -73,7 +73,7 @@ export const wishlistSlice = createSlice({
 
     // reset wishlist data on logout
     builder.addCase(logout, (state) => {
-      state.loading = "pending";
+      state.loading = "idle";
       state.error = null;
       state.itemsId = [];
       state.products = [];
