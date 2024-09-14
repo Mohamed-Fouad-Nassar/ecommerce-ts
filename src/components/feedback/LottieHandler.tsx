@@ -7,6 +7,7 @@ import loading from "@assets/lottieFiles/loading.json";
 import shipping from "@assets/lottieFiles/shipping.json";
 import noResult from "@assets/lottieFiles/noResult.json";
 import notFound from "@assets/lottieFiles/notFound.json";
+import success from "@assets/lottieFiles/success.json";
 
 const lotties = {
   notFound,
@@ -15,6 +16,7 @@ const lotties = {
   loading,
   shipping,
   noResult,
+  success,
 };
 
 type LottieHandlerProps = {

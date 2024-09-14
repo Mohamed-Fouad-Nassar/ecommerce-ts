@@ -1,0 +1,17 @@
+.layout {
+  display: flex;
+  gap: 25px;
+}
+@media (max-width: 767px) {
+  .layout {
+    flex-direction: column;
+  }
+}
+
+.layout > div:first-of-type {
+  min-width: 200px;
+}
+
+.layout > div:last-of-type {
+  flex: 1;
+}

@@ -1,25 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { TError, TLoading } from "@customTypes/shared.types";
-import { TProduct } from "@customTypes/product.types";
+import getOrders from "./actions/getOrders";
 import createOrder from "./actions/createOrder";
+
+import { TOrder } from "@customTypes/orders.types";
 import { isString } from "@customTypes/guards.types";
+import { TError, TLoading } from "@customTypes/shared.types";
 
-type TOrder = {
-  id: number;
-  userId: number;
-  subtotal: number;
-  items: TProduct[];
-};
-
-type TOrderState = {
+type OrderState = {
   error: TError;
-  order: TOrder[];
+  orders: TOrder[];
   loading: TLoading;
 };
 
-const initialState: TOrderState = {
-  order: [],
+const initialState: OrderState = {
+  orders: [],
   error: null,
   loading: "idle",
 };
@@ -27,7 +22,13 @@ const initialState: TOrderState = {
 const ordersSlice = createSlice({
   name: "orders",
   initialState,
-  reducers: {},
+  reducers: {
+    resetOrderState: (state) => {
+      state.error = null;
+      state.loading = "idle";
+    },
+  },
+
   extraReducers: (builder) => {
     builder
       .addCase(createOrder.pending, (state) => {
@@ -41,9 +42,23 @@ const ordersSlice = createSlice({
         state.loading = "failed";
         if (isString(action.payload)) state.error = action.payload;
       });
+
+    builder
+      .addCase(getOrders.pending, (state) => {
+        state.error = null;
+        state.loading = "pending";
+      })
+      .addCase(getOrders.fulfilled, (state, action) => {
+        state.loading = "succeeded";
+        state.orders = action.payload;
+      })
+      .addCase(getOrders.rejected, (state, action) => {
+        state.loading = "failed";
+        if (isString(action.payload)) state.error = action.payload;
+      });
   },
 });
 
-export { createOrder };
-
+export { createOrder, getOrders };
+export const { resetOrderState } = ordersSlice.actions;
 export default ordersSlice.reducer;

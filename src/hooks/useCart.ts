@@ -7,8 +7,8 @@ import {
   getCartProducts,
   removeFromCart,
 } from "@store/cart/cartSlice";
-import { createOrder } from "@store/orders/ordersSlice";
 import { useAppDispatch, useAppSelector } from "@store/hooks";
+import { createOrder, resetOrderState } from "@store/orders/ordersSlice";
 
 export default function useCart() {
   const dispatch = useAppDispatch();
@@ -16,12 +16,15 @@ export default function useCart() {
   const { loading, error, products, items } = useAppSelector(
     (state) => state.cart
   );
+  const { loading: orderStatus } = useAppSelector((state) => state.orders);
 
   useEffect(() => {
-    dispatch(getCartProducts());
+    const promise = dispatch(getCartProducts());
 
     return () => {
+      promise.abort();
       dispatch(cleanUpCart());
+      dispatch(resetOrderState());
     };
   }, [dispatch]);
 
@@ -50,6 +53,7 @@ export default function useCart() {
     error,
     loading,
     accessToken,
+    orderStatus,
     finalProducts,
     handleChangeQty,
     handlePlaceOrder,

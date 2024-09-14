@@ -5,7 +5,7 @@ import { RootState } from "@store/index";
 import handleAxiosErr from "@utils/handleAxiosErr";
 
 const createOrder = createAsyncThunk(
-  "order/createOrder",
+  "orders/createOrder",
   async (subtotal: number, thunkAPI) => {
     const { rejectWithValue, getState } = thunkAPI;
     const { auth, cart } = getState() as RootState;

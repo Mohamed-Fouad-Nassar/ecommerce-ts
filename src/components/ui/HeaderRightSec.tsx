@@ -1,4 +1,4 @@
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { DropdownButton, Nav, NavDropdown } from "react-bootstrap";
 
 import { logout } from "@store/auth/authSlice";
@@ -24,10 +24,10 @@ export default function HeaderRightSec() {
         align={{ lg: "end" }}
         title={`${user?.firstName} ${user?.lastName}`}
       >
-        <NavDropdown.Item as={Link} to="/profile">
+        <NavDropdown.Item as={NavLink} to="/profile" end>
           Profile
         </NavDropdown.Item>
-        <NavDropdown.Item as={Link} to="/orders">
+        <NavDropdown.Item as={NavLink} to="/profile/orders">
           Orders
         </NavDropdown.Item>
         <NavDropdown.Divider />

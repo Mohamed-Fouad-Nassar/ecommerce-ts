@@ -10,6 +10,7 @@ export default function Cart() {
   const {
     error,
     loading,
+    orderStatus,
     handleChangeQty,
     handlePlaceOrder,
     handleRemoveFromCart,
@@ -35,11 +36,17 @@ export default function Cart() {
               handlePlaceOrder={handlePlaceOrder}
             />
           </>
+        ) : orderStatus === "succeeded" ? (
+          <LottieHandler
+            type="success"
+            lottieStyle={{ width: "230px" }}
+            message="Your order placed successfully."
+          />
         ) : (
           <LottieHandler
             type="empty"
-            message="Your cart is empty. please, start add some products"
             lottieStyle={{ width: "230px" }}
+            message="Your cart is empty. please, start add some products"
           />
         )}
       </Loader>

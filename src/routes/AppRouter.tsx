@@ -2,6 +2,7 @@ import { lazy } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const MainLayout = lazy(() => import("@layouts/MainLayout"));
+const ProfileLayout = lazy(() => import("@layouts/ProfileLayout"));
 
 const Cart = lazy(() => import("@pages/Cart"));
 const Home = lazy(() => import("@pages/Home"));
@@ -101,25 +102,53 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "orders",
-        element: (
-          <ProtectedRoute>
-            <SuspenseFallback>
-              <Orders />
-            </SuspenseFallback>
-          </ProtectedRoute>
-        ),
-      },
-      {
         path: "profile",
         element: (
           <ProtectedRoute>
             <SuspenseFallback>
-              <Profile />
+              <ProfileLayout />
             </SuspenseFallback>
           </ProtectedRoute>
         ),
+        children: [
+          {
+            index: true,
+            element: (
+              <SuspenseFallback>
+                <Profile />
+              </SuspenseFallback>
+            ),
+          },
+          {
+            path: "orders",
+            element: (
+              <SuspenseFallback>
+                <Orders />
+              </SuspenseFallback>
+            ),
+          },
+        ],
       },
+      // {
+      //   path: "orders",
+      //   element: (
+      //     <ProtectedRoute>
+      //       <SuspenseFallback>
+      //         <Orders />
+      //       </SuspenseFallback>
+      //     </ProtectedRoute>
+      //   ),
+      // },
+      // {
+      //   path: "profile",
+      //   element: (
+      //     <ProtectedRoute>
+      //       <SuspenseFallback>
+      //         <Profile />
+      //       </SuspenseFallback>
+      //     </ProtectedRoute>
+      //   ),
+      // },
       {
         path: "login",
         element: (

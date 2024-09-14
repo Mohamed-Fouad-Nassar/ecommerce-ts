@@ -10,10 +10,11 @@ import { TError, TLoading } from "@customTypes/shared.types";
 import LottieHandler from "./LottieHandler";
 
 const skeletonTypes = {
+  cart: CartSkeleton,
+  orders: SpinnerFullPage,
+  default: SpinnerFullPage,
   products: ProductSkeleton,
   categories: CategorySkeleton,
-  cart: CartSkeleton,
-  default: SpinnerFullPage,
 };
 
 type LoaderProps = {
@@ -32,8 +33,6 @@ export default function Loader({
   const Component = skeletonTypes[type];
 
   if (loading === "pending") return <Component />;
-
-  // if (loading === "failed") return <Alert variant="danger">{error}</Alert>;
 
   if (loading === "failed")
     return (
