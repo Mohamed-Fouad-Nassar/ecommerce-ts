@@ -1,7 +1,7 @@
 import Heading from "@components/ui/Heading";
 import GridList from "@components/ui/GridList";
 import Loader from "@components/feedback/Loader";
-import Category from "@components/eCommerce/Categories/Category";
+import Category from "@components/eCommerce/categories/Category";
 
 import useCategories from "@hooks/useCategories";
 

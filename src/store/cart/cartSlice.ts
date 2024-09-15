@@ -10,17 +10,17 @@ import { TError, TLoading } from "@customTypes/shared.types";
 import getCartProducts from "./actions/getCartProducts";
 
 type CartState = {
-  items: { [key: string]: number };
-  products: TProduct[];
-  loading: TLoading;
   error: TError;
+  loading: TLoading;
+  products: TProduct[];
+  items: { [key: string]: number };
 };
 
 const initialState: CartState = {
   items: {},
+  error: null,
   products: [],
   loading: "idle",
-  error: null,
 };
 
 const cartSlice = createSlice({
@@ -41,6 +41,7 @@ const cartSlice = createSlice({
       const id = action.payload;
       delete state.items[id];
       state.products = state.products.filter((el) => el.id !== id);
+      if (Object.keys(state.items).length == 0) state.loading = "idle";
     },
 
     clearCart: (state) => {
@@ -52,6 +53,7 @@ const cartSlice = createSlice({
 
     cleanUpCart: (state) => {
       state.products = [];
+      state.loading = "idle";
     },
   },
 

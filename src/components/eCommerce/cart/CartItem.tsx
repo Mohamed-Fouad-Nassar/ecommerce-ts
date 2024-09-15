@@ -3,8 +3,8 @@ import { Form, Button } from "react-bootstrap";
 import { TProduct } from "@customTypes/product.types";
 
 import styles from "./cartItem.module.css";
-const { cartItem, product, productImg, productInfo, cartItemSelection } =
-  styles;
+import ProductInfo from "../products/ProductInfo";
+const { cartItem, cartItemSelection } = styles;
 
 type CartItemProps = TProduct & {
   quantity: number;
@@ -41,24 +41,22 @@ export default function CartItem({
 
   return (
     <div className={cartItem}>
-      <div className={product}>
-        <div className={productImg}>
-          <img src={img} alt={title} />
-        </div>
-        <div className={productInfo}>
-          <h2 className="text-capitalize">{title}</h2>
-          <p>{cat_prefix}</p>
-          <h3>{price.toFixed(2)} EGP</h3>
-          <Button
-            variant="danger"
-            style={{ color: "white" }}
-            className="mt-auto"
-            onClick={() => handleRemoveFromCart(id)}
-          >
-            Remove
-          </Button>
-        </div>
-      </div>
+      <ProductInfo
+        dir="row"
+        title={title}
+        img={img}
+        price={price}
+        catPrefix={cat_prefix}
+      >
+        <Button
+          variant="danger"
+          style={{ color: "white" }}
+          className="mt-auto"
+          onClick={() => handleRemoveFromCart(id)}
+        >
+          Remove
+        </Button>
+      </ProductInfo>
 
       <div className={cartItemSelection}>
         <span className="d-block mb-1">Quantity</span>

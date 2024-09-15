@@ -1,18 +1,16 @@
-// import { Alert } from "react-bootstrap";
-
-import SpinnerFullPage from "@components/ui/SpinnerFullPage";
+import LottieHandler from "./LottieHandler";
 
 import CartSkeleton from "./skeletons/CartSkeleton";
+import GlobalSkeleton from "./skeletons/GlobalSkeleton";
 import ProductSkeleton from "./skeletons/ProductSkeleton";
 import CategorySkeleton from "./skeletons/CategorySkeleton";
 
 import { TError, TLoading } from "@customTypes/shared.types";
-import LottieHandler from "./LottieHandler";
 
 const skeletonTypes = {
   cart: CartSkeleton,
-  orders: SpinnerFullPage,
-  default: SpinnerFullPage,
+  orders: GlobalSkeleton,
+  default: GlobalSkeleton,
   products: ProductSkeleton,
   categories: CategorySkeleton,
 };

@@ -5,6 +5,7 @@ import Loader from "@components/feedback/Loader";
 import Order from "@components/eCommerce/orders/Order";
 
 import useOrders from "@hooks/useOrders";
+import LottieHandler from "@components/feedback/LottieHandler";
 
 export default function Orders() {
   const { loading, error, orders } = useOrders();
@@ -14,20 +15,24 @@ export default function Orders() {
       <Heading title="your orders" />
 
       <Loader loading={loading} error={error} type="orders">
-        <Table striped responsive bordered>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Items</th>
-              <th>TotalPrice</th>
-            </tr>
-          </thead>
-          <tbody>
-            {orders.map((order) => (
-              <Order key={order?.id} {...order} />
-            ))}
-          </tbody>
-        </Table>
+        {!orders.length ? (
+          <LottieHandler type="noResult" message="There are no orders yet." />
+        ) : (
+          <Table striped responsive bordered>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Items</th>
+                <th>TotalPrice</th>
+              </tr>
+            </thead>
+            <tbody>
+              {orders.map((order) => (
+                <Order key={order?.id} {...order} />
+              ))}
+            </tbody>
+          </Table>
+        )}
       </Loader>
     </>
   );

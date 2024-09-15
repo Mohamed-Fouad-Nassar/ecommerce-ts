@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import { getOrders } from "@store/orders/ordersSlice";
+import { getOrders, resetOrderState } from "@store/orders/ordersSlice";
 import { useAppDispatch, useAppSelector } from "@store/hooks";
 
 export default function useOrders() {
@@ -12,6 +12,7 @@ export default function useOrders() {
 
     return () => {
       promise.abort();
+      dispatch(resetOrderState());
     };
   }, [dispatch]);
 

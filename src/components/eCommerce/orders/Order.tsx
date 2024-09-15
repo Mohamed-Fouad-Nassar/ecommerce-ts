@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Button } from "react-bootstrap";
 
+import ProductInfo from "../products/ProductInfo";
 import MyModal from "@components/ui/MyModal";
-import ProductInfo from "../Products/ProductInfo";
 
 import { TOrder } from "@customTypes/orders.types";
 
@@ -18,7 +18,22 @@ export default function Orders({ id, items, subtotal }: TOrder) {
       >
         <MyModal.Body>
           {items.map((el) => (
-            <ProductInfo key={el.id} item={el} />
+            <div
+              style={{
+                marginBottom: "10px",
+                paddingBottom: "15px",
+                borderBottom: "1px solid #eee",
+              }}
+            >
+              <ProductInfo
+                key={el.id}
+                dir="row"
+                img={el.img}
+                title={el.title}
+                price={el.price}
+                quantity={el.quantity}
+              />
+            </div>
           ))}
         </MyModal.Body>
       </MyModal>
