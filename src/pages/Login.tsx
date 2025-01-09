@@ -1,6 +1,6 @@
 import Heading from "@components/ui/Heading";
 import LoginForm from "@components/forms/LoginForm";
-import AuthTextLink from "@components/ui/authTextLink";
+import AuthTextLink from "@components/ui/AuthTextLink";
 
 export default function Login() {
   return (

@@ -1,5 +1,5 @@
 import Heading from "@components/ui/Heading";
-import AuthTextLink from "@components/ui/authTextLink";
+import AuthTextLink from "@components/ui/AuthTextLink";
 import RegisterForm from "@components/forms/RegisterForm";
 
 export default function Register() {
