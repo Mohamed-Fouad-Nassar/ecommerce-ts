@@ -1,0 +1,19 @@
+.container {
+  margin: 0 20px !important;
+  display: flex;
+  min-height: 100dvh;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.wrapper {
+  padding: 40px !important;
+  border-radius: 5px;
+  background-color: #f7f7f7;
+}
+@media (max-width: 576px) {
+  .wrapper {
+    padding: 20px !important;
+  }
+}

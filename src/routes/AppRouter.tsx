@@ -1,6 +1,12 @@
+import {
+  Navigate,
+  RouterProvider,
+  createBrowserRouter,
+} from "react-router-dom";
 import { lazy } from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
+const AuthLayout = lazy(() => import("@layouts/AuthLayout"));
 const MainLayout = lazy(() => import("@layouts/MainLayout"));
 const ProfileLayout = lazy(() => import("@layouts/ProfileLayout"));
 
@@ -55,7 +61,6 @@ const router = createBrowserRouter([
               status: 400,
               statusText: "Product Prefix Category Not Found",
             });
-
           return true;
         },
       },
@@ -129,26 +134,20 @@ const router = createBrowserRouter([
           },
         ],
       },
-      // {
-      //   path: "orders",
-      //   element: (
-      //     <ProtectedRoute>
-      //       <SuspenseFallback>
-      //         <Orders />
-      //       </SuspenseFallback>
-      //     </ProtectedRoute>
-      //   ),
-      // },
-      // {
-      //   path: "profile",
-      //   element: (
-      //     <ProtectedRoute>
-      //       <SuspenseFallback>
-      //         <Profile />
-      //       </SuspenseFallback>
-      //     </ProtectedRoute>
-      //   ),
-      // },
+    ],
+  },
+  {
+    path: "auth",
+    element: (
+      <SuspenseFallback>
+        <AuthLayout />
+      </SuspenseFallback>
+    ),
+    children: [
+      {
+        index: true,
+        element: <Navigate to="login" />,
+      },
       {
         path: "login",
         element: (
@@ -170,5 +169,10 @@ const router = createBrowserRouter([
 ]);
 
 export default function AppRouter() {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <RouterProvider router={router} />
+      <Toaster position="top-center" />
+    </>
+  );
 }

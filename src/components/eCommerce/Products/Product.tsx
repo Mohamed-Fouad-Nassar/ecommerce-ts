@@ -16,12 +16,12 @@ const { product, maximumNotice, wishlistBtn } = styles;
 
 const Product = memo(function Product({
   id,
-  title,
   img,
+  title,
   price,
   max = 0,
   quantity = 0,
-  isLiked,
+  isLiked = false,
   isAuthorized = false,
 }: TProduct) {
   const {
@@ -33,7 +33,7 @@ const Product = memo(function Product({
     isQtyReachedMax,
     handleAddToCart,
     handleLikeToggle,
-  } = useProductCart(isAuthorized, max, quantity);
+  } = useProductCart(max, quantity, isLiked, isAuthorized);
 
   return (
     <>

@@ -12,6 +12,7 @@ export default function Cart() {
     loading,
     orderStatus,
     handleChangeQty,
+    handleClearCart,
     handlePlaceOrder,
     handleRemoveFromCart,
     finalProducts: products,
@@ -33,6 +34,7 @@ export default function Cart() {
             <CartSubTotal
               products={products}
               userAccessToken={accessToken}
+              handleClearCart={handleClearCart}
               handlePlaceOrder={handlePlaceOrder}
             />
           </>

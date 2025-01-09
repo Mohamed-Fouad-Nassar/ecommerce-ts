@@ -13,10 +13,11 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
 import auth from "./auth/authSlice";
 import cart from "./cart/cartSlice";
+import orders from "./orders/ordersSlice";
+import toasts from "./toast/toastsSlice";
 import products from "./products/productsSlice";
 import wishlist from "./wishlist/wishlistSlice";
 import categories from "./categories/categoriesSlice";
-import orders from "./orders/ordersSlice";
 
 const cartPersistConfig = {
   key: "cart",
@@ -31,6 +32,7 @@ const authPersistConfig = {
 };
 
 const rootReducer = combineReducers({
+  toasts,
   orders,
   products,
   wishlist,
@@ -44,7 +46,16 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        ignoredActions: [
+          FLUSH,
+          REHYDRATE,
+          PAUSE,
+          PERSIST,
+          PURGE,
+          REGISTER,
+          "toasts/addToast",
+        ],
+        ignoredPaths: [/^toasts\.records\.\d+\.onCloseToast$/],
       },
     }),
 });

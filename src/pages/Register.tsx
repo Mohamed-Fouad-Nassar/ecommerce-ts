@@ -1,4 +1,5 @@
 import Heading from "@components/ui/Heading";
+import AuthTextLink from "@components/ui/authTextLink";
 import RegisterForm from "@components/forms/RegisterForm";
 
 export default function Register() {
@@ -6,6 +7,11 @@ export default function Register() {
     <>
       <Heading title="user registration" />
       <RegisterForm />
+      <AuthTextLink
+        title="Log in"
+        path="/auth/login"
+        text="Already have an account?"
+      />
     </>
   );
 }

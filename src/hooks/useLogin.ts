@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
 
@@ -21,13 +22,15 @@ export default function useLogin() {
   });
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { loading, error, accessToken } = useAppSelector((state) => state.auth);
+  const { loading, accessToken } = useAppSelector((state) => state.auth);
 
   const submitForm: SubmitHandler<LoginFormTypes> = async (data) => {
     dispatch(login(data))
       .unwrap()
+      .then(() => toast.success("Logged in successfully."))
       .then(() => navigate("/"))
-      .then(() => dispatch(getWishlistItems()));
+      .then(() => dispatch(getWishlistItems()))
+      .catch((err) => toast.error(err));
   };
 
   useEffect(() => {
@@ -35,7 +38,6 @@ export default function useLogin() {
   }, [dispatch]);
 
   return {
-    error,
     errors,
     loading,
     register,

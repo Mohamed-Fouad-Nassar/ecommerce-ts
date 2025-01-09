@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -23,7 +24,7 @@ export default function useRegister() {
   });
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { loading, error, accessToken } = useAppSelector((state) => state.auth);
+  const { loading, accessToken } = useAppSelector((state) => state.auth);
 
   const {
     prevEmail,
@@ -47,7 +48,9 @@ export default function useRegister() {
     const { firstName, lastName, email, password } = data;
     dispatch(authRegister({ email, password, firstName, lastName }))
       .unwrap()
-      .then(() => navigate("/login"));
+      .then(() => toast.success("Account created successfully."))
+      .then(() => navigate("/auth/login"))
+      .catch((err) => toast.error(err));
   };
 
   useEffect(() => {
@@ -55,7 +58,6 @@ export default function useRegister() {
   }, [dispatch]);
 
   return {
-    error,
     errors,
     loading,
     register,

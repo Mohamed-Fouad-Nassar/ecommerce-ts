@@ -19,6 +19,7 @@ export default function Orders({ id, items, subtotal }: TOrder) {
         <MyModal.Body>
           {items.map((el) => (
             <div
+              key={el.id}
               style={{
                 marginBottom: "10px",
                 paddingBottom: "15px",
@@ -26,7 +27,6 @@ export default function Orders({ id, items, subtotal }: TOrder) {
               }}
             >
               <ProductInfo
-                key={el.id}
                 dir="row"
                 img={el.img}
                 title={el.title}

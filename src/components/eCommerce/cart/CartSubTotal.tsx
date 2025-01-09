@@ -15,6 +15,7 @@ import styles from "./cartSubTotal.module.css";
 
 type CartSubTotalProps = {
   products: TProduct[];
+  handleClearCart: () => void;
   userAccessToken: string | null;
   handlePlaceOrder: (subtotal: number) => void;
 };
@@ -22,6 +23,7 @@ type CartSubTotalProps = {
 export default function CartSubTotal({
   products,
   userAccessToken,
+  handleClearCart,
   handlePlaceOrder,
 }: CartSubTotalProps) {
   const [showModal, setShowModal] = useState(false);
@@ -78,13 +80,18 @@ export default function CartSubTotal({
       {/* {error && <Alert variant="danger">{error}</Alert>} */}
 
       {userAccessToken && (
-        <Button
-          variant="info"
-          style={{ color: "white", marginLeft: "auto", display: "block" }}
-          onClick={() => setShowModal(true)}
-        >
-          Place Order
-        </Button>
+        <div className="d-flex justify-content-end align-items-center gap-3">
+          <Button variant="danger" onClick={handleClearCart}>
+            Clear Cart
+          </Button>
+          <Button
+            variant="info"
+            style={{ color: "white" }}
+            onClick={() => setShowModal(true)}
+          >
+            Place Order
+          </Button>
+        </div>
       )}
     </>
   );

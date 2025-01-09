@@ -9,7 +9,7 @@ export default function ProtectedRoute({
 }) {
   const { accessToken } = useAppSelector((state) => state.auth);
 
-  if (!accessToken) return <Navigate to="/login" />;
+  if (!accessToken) return <Navigate to="/auth/login" />;
 
   return children;
 }

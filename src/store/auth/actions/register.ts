@@ -4,10 +4,10 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import handleAxiosErr from "@utils/handleAxiosErr";
 
 type TFormDate = {
-  firstName: string;
-  lastName: string;
-  password: string;
   email: string;
+  password: string;
+  lastName: string;
+  firstName: string;
 };
 
 const register = createAsyncThunk(

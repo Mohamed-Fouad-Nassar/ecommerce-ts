@@ -8,8 +8,8 @@ import styles from "./headerRightSec.module.css";
 const { dropDown } = styles;
 
 const nav = [
-  { title: "Login", path: "/login" },
-  { title: "Register", path: "/register" },
+  { title: "Login", path: "/auth/login" },
+  { title: "Register", path: "/auth/register" },
 ];
 
 export default function HeaderRightSec() {

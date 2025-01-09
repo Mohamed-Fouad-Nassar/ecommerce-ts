@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
-import { getOrders, resetOrderState } from "@store/orders/ordersSlice";
 import { useAppDispatch, useAppSelector } from "@store/hooks";
+import { getOrders, resetOrderState } from "@store/orders/ordersSlice";
 
 export default function useOrders() {
   const dispatch = useAppDispatch();
