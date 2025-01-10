@@ -6,7 +6,7 @@ import styles from "./profileLayout.module.css";
 export default function ProfileLayout() {
   return (
     <div className={styles.layout}>
-      <ListGroup>
+      <ListGroup className={styles["list-group"]}>
         <ListGroup.Item as={NavLink} to="/profile" end>
           Profile
         </ListGroup.Item>

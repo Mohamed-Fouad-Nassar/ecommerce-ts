@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Button } from "react-bootstrap";
 
-import ProductInfo from "../products/ProductInfo";
 import MyModal from "@components/ui/MyModal";
+import ProductInfo from "../products/ProductInfo";
 
 import { TOrder } from "@customTypes/orders.types";
 
@@ -12,9 +12,9 @@ export default function Orders({ id, items, subtotal }: TOrder) {
   return (
     <>
       <MyModal
-        title="Order Products Details"
         showModal={showModal}
         setShowModal={setShowModal}
+        title="Order Products Details"
       >
         <MyModal.Body>
           {items.map((el) => (

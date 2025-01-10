@@ -29,16 +29,28 @@ const ProductInfo = memo(function ProductInfo({
       </div>
 
       <div className={info}>
-        <div>
+        <div className="d-flex flex-column justify-content-between">
           <h2>{title}</h2>
-          {catPrefix && <p>{catPrefix}</p>}
-          <h3>{price?.toFixed(2)} EGP</h3>
-          {quantity ? <h3>Total Quantity: {quantity}</h3> : ""}
-          {quantity ? (
-            <h3>Price Total: {(quantity * price).toFixed(2)} EGP</h3>
-          ) : (
-            ""
-          )}
+          <div>
+            {catPrefix && <p>{catPrefix}</p>}
+            <h3>
+              Unit Price: <span>{price?.toFixed(2)}</span> EGP
+            </h3>
+            {quantity ? (
+              <h3>
+                Quantity: <span>{quantity}</span>
+              </h3>
+            ) : (
+              ""
+            )}
+            {quantity ? (
+              <h3>
+                Total Price: <span>{(quantity * price).toFixed(2)}</span> EGP
+              </h3>
+            ) : (
+              ""
+            )}
+          </div>
         </div>
 
         {children}

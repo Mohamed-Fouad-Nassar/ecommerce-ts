@@ -3,9 +3,9 @@ import { Table } from "react-bootstrap";
 import Heading from "@components/ui/Heading";
 import Loader from "@components/feedback/Loader";
 import Order from "@components/eCommerce/orders/Order";
+import LottieHandler from "@components/feedback/LottieHandler";
 
 import useOrders from "@hooks/useOrders";
-import LottieHandler from "@components/feedback/LottieHandler";
 
 export default function Orders() {
   const { loading, error, orders } = useOrders();

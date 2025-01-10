@@ -15,3 +15,22 @@
 .layout > div:last-of-type {
   flex: 1;
 }
+
+@media (max-width: 767px) {
+  .list-group {
+    display: flex;
+    flex-direction: row;
+  }
+  .list-group > a {
+    flex: 1;
+    text-align: center;
+    margin: 0 !important;
+    border-width: 1px !important;
+  }
+  .list-group > a:first-of-type {
+    border-radius: 5px 0 0 5px;
+  }
+  .list-group > a:last-of-type {
+    border-radius: 0 5px 5px 0;
+  }
+}

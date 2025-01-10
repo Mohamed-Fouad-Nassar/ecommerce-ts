@@ -10,7 +10,7 @@ export default function Category({ title, img, prefix }: TCategory) {
     <div className={category}>
       <Link to={`/products/${prefix}`}>
         <div className={categoryImg}>
-          <img src={img} alt={title} />
+          <img src={img} alt={`${title}-category-image`} />
         </div>
         <h4 className={categoryTitle}>{title}</h4>
       </Link>
