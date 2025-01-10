@@ -1,1 +1,13 @@
+body[data-bs-theme="dark"] {
+  color: white !important;
+  fill: white !important;
+}
 
+body[data-bs-theme="dark"] * {
+  color: white !important;
+}
+
+/* body[data-bs-theme="dark"] svg {
+  fill: white;
+  stroke: white;
+} */

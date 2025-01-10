@@ -43,7 +43,7 @@ const Product = memo(function Product({
         setShowModal={setShowModal}
       >
         <MyModal.Body>
-          <p> You need to login first to add this item to your wishlist.</p>
+          <p>You need to login first to add this item to your wishlist.</p>
         </MyModal.Body>
       </MyModal>
 

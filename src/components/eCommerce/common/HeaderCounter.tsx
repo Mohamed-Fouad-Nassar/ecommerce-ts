@@ -1,7 +1,7 @@
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import styles from "./headerCounter.module.css";
-import { Link } from "react-router-dom";
 const { container, totalQty, pumpQty, iconContainer } = styles;
 
 type HeaderCounterProps = {

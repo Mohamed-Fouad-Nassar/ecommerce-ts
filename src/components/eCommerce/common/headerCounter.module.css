@@ -30,6 +30,10 @@
   right: -5px;
   font-size: 12px;
 }
+body[data-bs-theme="dark"] .totalQty {
+  color: white;
+  background-color: #0c94af;
+}
 
 .pumpQty {
   animation: pumping 300ms ease-out;

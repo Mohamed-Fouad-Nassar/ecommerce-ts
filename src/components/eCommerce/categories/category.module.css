@@ -6,6 +6,10 @@
   background-color: #f2f2f2;
   box-shadow: 4px 3px 25px -15px #000000;
 }
+body[data-bs-theme="dark"] .categoryImg {
+  background-color: #2f3337;
+}
+
 .categoryImg img {
   width: 100%;
 }

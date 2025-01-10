@@ -1,0 +1,15 @@
+.theme-toggle {
+  border: none;
+  padding: 5px 8px;
+  border-radius: 3px;
+  background-color: #eee;
+}
+
+.theme-toggle svg {
+  width: 28px;
+  height: 28px;
+}
+
+body[data-bs-theme="dark"] .theme-toggle {
+  background-color: #2b3035;
+}
