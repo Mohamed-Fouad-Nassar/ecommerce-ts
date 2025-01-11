@@ -16,6 +16,7 @@ export default function Categories() {
 
       <Loader loading={loading} error={error} type="categories">
         <GridList<TCategory>
+          xs={6}
           data={categories}
           renderItem={(category) => (
             <Category key={category.id} {...category} />

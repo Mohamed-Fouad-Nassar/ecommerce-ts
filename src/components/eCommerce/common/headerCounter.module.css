@@ -12,6 +12,11 @@
   margin-bottom: 0;
   text-decoration: unset !important;
 }
+@media (max-width: 767px) {
+  .container h3 {
+    display: none;
+  }
+}
 
 .iconContainer {
   position: relative;

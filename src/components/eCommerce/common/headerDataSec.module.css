@@ -10,7 +10,7 @@
   border-right: 1px solid #000;
 }
 body[data-bs-theme="dark"] .container > *:first-of-type {
-  border-color: white;
+  border-color: #eee;
 }
 
 .container > *:last-of-type {
@@ -18,9 +18,9 @@ body[data-bs-theme="dark"] .container > *:first-of-type {
 }
 
 body[data-bs-theme="dark"] .container .wishlist {
-  fill: white;
+  fill: #eee;
 }
 
 body[data-bs-theme="dark"] .container .cart * {
-  stroke: white;
+  stroke: #eee;
 }

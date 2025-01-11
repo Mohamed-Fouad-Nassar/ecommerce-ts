@@ -2,15 +2,15 @@ import { Row, Col } from "react-bootstrap";
 import ContentLoader from "react-content-loader";
 
 export default function CategorySkeleton() {
-  const skeleton = Array(4)
+  const skeleton = Array(8)
     .fill(0)
     .map((_, i) => (
       <Col
-        key={i}
-        xs={12}
+        xs={6}
         sm={6}
         md={4}
         lg={3}
+        key={i}
         className="d-flex justify-content-center mb-5 mt-2"
       >
         <ContentLoader
